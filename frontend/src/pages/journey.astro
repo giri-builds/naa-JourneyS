@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ChatWidget from '../components/ChatWidget.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+const sections = await getCollection('journey');
+const sorted = sections.sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Journey">
+  <h1 class="mb-8 text-3xl font-bold text-primary dark:text-accent">My Journey</h1>
+  <div class="grid gap-6 md:grid-cols-2">
+    {sorted.map((section) => (
+      <a href={`${base}${section.id}`} class="group block rounded-lg border border-border p-6 transition-shadow hover:shadow-lg dark:border-slate-700">
+        <p class="text-xs text-text-muted dark:text-slate-500">{section.data.dateRange}</p>
+        <h2 class="mt-1 text-xl font-semibold group-hover:text-primary dark:group-hover:text-accent">
+          {section.data.title}
+        </h2>
+        <p class="mt-2 text-sm text-text-muted dark:text-slate-400">{section.data.summary}</p>
+        <span class="mt-3 inline-block rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+          {section.data.category}
+        </span>
+      </a>
+    ))}
+  </div>
+  <ChatWidget slot="chat-widget" />
+</BaseLayout>

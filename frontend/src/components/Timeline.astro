@@ -1,0 +1,35 @@
+---
+const base = import.meta.env.BASE_URL;
+
+interface Section {
+  id: string;
+  data: {
+    title: string;
+    order: number;
+    dateRange: string;
+    summary: string;
+    category: string;
+  };
+}
+
+interface Props {
+  sections: Section[];
+}
+
+const { sections } = Astro.props;
+---
+<section class="py-8">
+  <h2 class="mb-8 text-center text-2xl font-bold text-primary dark:text-accent">Life Timeline</h2>
+  <div class="relative border-l-2 border-primary/30 dark:border-accent/30 ml-4 md:ml-0 md:mx-auto md:max-w-2xl">
+    {sections.map((section, i) => (
+      <a href={`${base}${section.id}`} class="group relative mb-8 block pl-8">
+        <div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-white group-hover:bg-primary dark:border-accent dark:bg-slate-900 dark:group-hover:bg-accent"></div>
+        <p class="text-xs text-text-muted dark:text-slate-500">{section.data.dateRange}</p>
+        <h3 class="text-lg font-semibold group-hover:text-primary dark:group-hover:text-accent">
+          {section.data.title}
+        </h3>
+        <p class="text-sm text-text-muted dark:text-slate-400">{section.data.summary}</p>
+      </a>
+    ))}
+  </div>
+</section>

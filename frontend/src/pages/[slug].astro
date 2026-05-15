@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ChatWidget from '../components/ChatWidget.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const sections = await getCollection('journey');
+  return sections.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title}>
+  <article class="prose prose-slate mx-auto dark:prose-invert lg:prose-lg">
+    <header class="mb-8 not-prose">
+      <p class="text-sm text-text-muted dark:text-slate-400">{entry.data.dateRange}</p>
+      <h1 class="mt-2 text-3xl font-bold text-primary dark:text-accent">{entry.data.title}</h1>
+      <p class="mt-2 text-text-muted dark:text-slate-400">{entry.data.summary}</p>
+    </header>
+    <Content />
+  </article>
+
+  <ChatWidget slot="chat-widget" />
+</BaseLayout>

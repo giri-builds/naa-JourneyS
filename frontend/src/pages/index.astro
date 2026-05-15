@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Timeline from '../components/Timeline.astro';
+import ChatWidget from '../components/ChatWidget.astro';
+import { getCollection } from 'astro:content';
+
+const sections = await getCollection('journey');
+const sorted = sections.sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Home">
+  <section class="py-12 text-center">
+    <h1 class="text-4xl font-bold text-primary dark:text-accent md:text-5xl">
+      naa-JourneyS
+    </h1>
+    <p class="mt-4 text-lg text-text-muted dark:text-slate-400">
+      A personal chronicle — from the very beginning to where I stand today.
+    </p>
+    <p class="mt-2 text-sm text-text-muted dark:text-slate-500">
+      Explore my life sections below, or ask the chatbot anything about my journey.
+    </p>
+  </section>
+
+  <Timeline sections={sorted} />
+
+  <ChatWidget slot="chat-widget" />
+</BaseLayout>

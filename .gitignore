@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# Environment
+.env
+.env.local
+
+# Build outputs
+frontend/dist/
+.vercel/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (generated, but we DO commit these for Vercel deployment)
+# backend/data/embeddings.npy
+# backend/data/chunks.json
