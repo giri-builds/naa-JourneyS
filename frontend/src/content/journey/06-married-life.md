@@ -8,11 +8,7 @@ summary: "Partnership, growth, and building a life together."
 
 ## Married Life
 
-*Replace this with your story.*
-
-Add details about:
-- How you met
-- Marriage milestones
-- Building a home together
-- Shared goals and adventures
-- Life lessons from partnership
+I got married on July 11, 2018.
+Spouse Name: Parveen
+Place: Badvel
+District: Kadapa

@@ -26,3 +26,9 @@ If I could go back to my school days, I’d study with purpose, clarity, and pas
 🎯 What matters is that you keep learning, stay curious, and make the most of every opportunity that comes your way.
 🎯 Your journey may start small — but your mindset decides how far you’ll go.
 Keep believing, keep building — one step at a time. 💪
+
+I studied in Sri Vijayavani Vidyanikethan from the year 1998 to 2005.
+I completed my S.S.C in 2005 from the same school and secured 510/600 marks
+
+Place: Yerraguntla
+District: Kadapa (Rayalaseema)

@@ -8,11 +8,11 @@ summary: "University life — academics, independence, and professional preparat
 
 ## University Years
 
-*Replace this with your graduation experience.*
+I joined Vivekananda Institute of Engineering and Technology college for my Graduation in the year 2007 and completed it in 2011 with 68% 
+Place: Bogaram Village
+Mandal: Keesara
+City: Hyderabad (Telangana)
 
-Add details about:
-- University/college name and course
-- Campus life
-- Projects and internships
-- Skills developed
-- Career aspirations formed
+Later i did PGDB in Manipal University from August 2013 to April 2014.
+Place: Chokkanahalli
+City: Bangalore

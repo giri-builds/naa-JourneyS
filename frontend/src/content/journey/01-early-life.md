@@ -21,3 +21,7 @@ And here’s the truth:
 My parents never pressured me to achieve something big — they simply gave me freedom and trust, and that made all the difference.
 👉 You don’t need to be extraordinary to build a remarkable life.
  All you need is freedom, time, consistency, and the courage to take small steps every single day.
+
+Date of Birth: October 1, 1989
+Place: Chennavaram, Porumamilla
+District: Kadapa (Rayalaseema)

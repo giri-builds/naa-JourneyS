@@ -8,11 +8,14 @@ summary: "Parenthood — the most rewarding chapter."
 
 ## Parenthood
 
-*Replace this with your experience as a parent.*
+I have two kids (Boys)
 
-Add details about:
-- Becoming a parent
-- Watching them grow
-- Parenting philosophy
-- Memorable moments
-- How it changed your perspective
+Elder Son - 
+Name: Shayan
+DOB: August 27, 2020
+Nick Name: kiwi
+
+Younger Son - 
+Name: Nehan
+DOB: December 18, 2023
+Nick Name: wiki
