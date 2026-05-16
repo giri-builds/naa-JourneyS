@@ -10,7 +10,7 @@ def get_embedding(text: str) -> list[float]:
     api_key = os.environ.get('HF_API_KEY', '')
     model = 'sentence-transformers/all-MiniLM-L6-v2'
     response = requests.post(
-        f'https://api-inference.huggingface.co/pipeline/feature-extraction/{model}',
+        f'https://router.huggingface.co/hf-inference/models/{model}/pipeline/feature-extraction',
         headers={'Authorization': f'Bearer {api_key}'},
         json={'inputs': text, 'options': {'wait_for_model': True}},
     )

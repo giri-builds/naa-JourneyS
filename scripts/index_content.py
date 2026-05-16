@@ -56,7 +56,7 @@ def chunk_text(text: str, metadata: dict) -> list[dict]:
 
 def get_embeddings_batch(texts: list[str]) -> list[list[float]]:
     response = requests.post(
-        f'https://api-inference.huggingface.co/pipeline/feature-extraction/{EMBEDDING_MODEL}',
+        f'https://router.huggingface.co/hf-inference/models/{EMBEDDING_MODEL}/pipeline/feature-extraction',
         headers={'Authorization': f'Bearer {HF_API_KEY}'},
         json={'inputs': texts, 'options': {'wait_for_model': True}},
     )
