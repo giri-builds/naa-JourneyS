@@ -31,6 +31,8 @@ jobs:
 
       - name: Build Astro site
         working-directory: frontend
+        env:
+          PUBLIC_BACKEND_URL: ${{ vars.PUBLIC_BACKEND_URL }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
