@@ -1,13 +1,54 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --color-primary: #1e3a5f;
-  --color-primary-light: #2d5a8e;
-  --color-accent: #e8a838;
+  --color-primary: #0ea5e9;
+  --color-primary-light: #38bdf8;
+  --color-accent: #22d3ee;
+  --color-accent-2: #38bdf8;
   --color-surface: #f8fafc;
-  --color-surface-dark: #0f172a;
+  --color-surface-dark: #020617;
+  --color-surface-elevated: #0f172a;
   --color-text: #1e293b;
   --color-text-muted: #64748b;
-  --color-text-dark: #e2e8f0;
+  --color-text-dark: #f1f5f9;
   --color-border: #e2e8f0;
+  --color-border-dark: #1e293b;
+}
+
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    color: #0b1120;
+    background-image: linear-gradient(135deg, #22d3ee 0%, #38bdf8 100%);
+    box-shadow: 0 0 30px rgba(34, 211, 238, 0.45);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.6);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    color: #f1f5f9;
+    background-color: #0f172a;
+    border: 1px solid #1e293b;
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .btn-secondary:hover {
+    border-color: #22d3ee;
+    background-color: #1e293b;
+  }
 }
