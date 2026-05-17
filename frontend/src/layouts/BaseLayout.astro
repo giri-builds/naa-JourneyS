@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SocialLinks from '../components/SocialLinks.astro';
 
 interface Props {
   title: string;
@@ -31,6 +32,7 @@ const base = import.meta.env.BASE_URL;
     </header>
 
     <main class="mx-auto max-w-5xl px-4 py-8">
+      <SocialLinks />
       <slot />
     </main>
 

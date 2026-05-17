@@ -41,22 +41,22 @@ const points = inOrder.map((s) => {
 });
 
 const W = 1600;
-const H = 520;
+const H = 380;
 const padX = 110;
-const padTop = 150;
-const padBottom = 110;
+const padTop = 90;
+const padBottom = 70;
 
 const maxAge = Math.max(...points.map((p) => p.age)) + 2;
 const minAge = 0;
 const minYear = BIRTH_YEAR;
 const maxYear = BIRTH_YEAR + maxAge;
 
-const xFor = (age: number) =>
-  padX + ((age - minAge) / (maxAge - minAge)) * (W - padX * 2);
-const yFor = (year: number) =>
-  H - padBottom - ((year - minYear) / (maxYear - minYear)) * (H - padTop - padBottom);
+const xFor = (year: number) =>
+  padX + ((year - minYear) / (maxYear - minYear)) * (W - padX * 2);
+const yFor = (age: number) =>
+  H - padBottom - ((age - minAge) / (maxAge - minAge)) * (H - padTop - padBottom);
 
-const placed = points.map((p) => ({ ...p, px: xFor(p.age), py: yFor(p.year) }));
+const placed = points.map((p) => ({ ...p, px: xFor(p.year), py: yFor(p.age) }));
 
 function roadPath(pts: { px: number; py: number }[]): string {
   if (pts.length < 2) return '';
@@ -84,9 +84,9 @@ function roadPath(pts: { px: number; py: number }[]): string {
 const pathD = roadPath(placed);
 ---
 
-<section class="py-8">
-  <h2 class="mb-2 text-center text-2xl font-bold text-primary dark:text-accent">Life Timeline</h2>
-  <p class="mb-6 text-center text-xs text-text-muted dark:text-slate-500">
+<section class="pt-2 pb-6">
+  <h2 class="mb-1 text-center text-2xl font-bold text-primary dark:text-accent">Life Timeline</h2>
+  <p class="mb-3 text-center text-xs text-text-muted dark:text-slate-500">
     Hover any milestone for details &middot; scroll sideways on small screens
   </p>
 
@@ -109,10 +109,10 @@ const pathD = roadPath(placed);
       </svg>
 
       <span class="pointer-events-none absolute left-3 top-3 text-[11px] font-medium uppercase tracking-wider text-text-muted dark:text-slate-500">
-        &uarr; Years
+        &uarr; Age
       </span>
       <span class="pointer-events-none absolute bottom-3 right-4 text-[11px] font-medium uppercase tracking-wider text-text-muted dark:text-slate-500">
-        Age &rarr;
+        Years &rarr;
       </span>
 
       {placed.map((p, i) => {

@@ -6,6 +6,9 @@ on:
     paths:
       - 'frontend/src/content/journey/**'
 
+permissions:
+  contents: write
+
 jobs:
   index:
     runs-on: ubuntu-latest
