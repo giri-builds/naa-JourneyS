@@ -22,7 +22,7 @@ const base = import.meta.env.BASE_URL;
   </head>
   <body class="min-h-screen bg-surface text-text dark:bg-surface-dark dark:text-text-dark">
     <header class="sticky top-0 z-40 border-b border-border bg-white/80 backdrop-blur dark:border-slate-700 dark:bg-slate-900/80">
-      <nav class="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+      <nav class="mx-auto flex max-w-[1700px] items-center justify-between px-6 py-3">
         <a href={base} class="text-xl font-bold text-primary dark:text-accent">naa-JourneyS</a>
         <div class="hidden gap-6 md:flex">
           <a href={base} class="text-sm hover:text-primary dark:hover:text-accent">Home</a>
@@ -31,7 +31,7 @@ const base = import.meta.env.BASE_URL;
       </nav>
     </header>
 
-    <main class="mx-auto max-w-5xl px-4 py-8">
+    <main class="mx-auto max-w-[1700px] px-6 py-8">
       <SocialLinks />
       <slot />
     </main>

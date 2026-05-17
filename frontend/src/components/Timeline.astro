@@ -41,10 +41,10 @@ const points = inOrder.map((s) => {
 });
 
 const W = 1600;
-const H = 380;
+const H = 420;
 const padX = 110;
-const padTop = 90;
-const padBottom = 70;
+const padTop = 110;
+const padBottom = 110;
 
 const maxAge = Math.max(...points.map((p) => p.age)) + 2;
 const minAge = 0;
@@ -117,8 +117,8 @@ const pathD = roadPath(placed);
 
       {placed.map((p, i) => {
         const above = i % 2 === 0;
-        const labelPos = above ? 'bottom-[18px]' : 'top-[18px]';
-        const popoverPos = above ? 'top-[18px]' : 'bottom-[18px]';
+        const labelPos = above ? 'bottom-[36px]' : 'top-[36px]';
+        const popoverPos = above ? 'top-[36px]' : 'bottom-[36px]';
         return (
           <a
             href={`${base}${p.id}`}
