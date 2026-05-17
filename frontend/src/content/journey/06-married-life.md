@@ -1,7 +1,7 @@
 ---
 title: "Married Life"
 order: 6
-dateRange: "Year — Present"
+dateRange: "2018 — Present"
 category: "personal"
 summary: "Partnership, growth, and building a life together."
 ---

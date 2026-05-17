@@ -17,12 +17,12 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests numpy
+        run: pip3 install requests numpy
 
       - name: Run indexer
         env:
           HF_API_KEY: ${{ secrets.HF_API_KEY }}
-        run: python scripts/index_content.py
+        run: python3 scripts/index_content.py
 
       - name: Commit updated index
         run: |

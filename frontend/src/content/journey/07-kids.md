@@ -1,7 +1,7 @@
 ---
 title: "Kids"
 order: 7
-dateRange: "Year — Present"
+dateRange: "2020 — Present"
 category: "personal"
 summary: "Parenthood — the most rewarding chapter."
 ---

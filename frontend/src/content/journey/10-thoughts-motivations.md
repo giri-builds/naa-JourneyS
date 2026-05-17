@@ -8,6 +8,20 @@ summary: "Core beliefs, motivations, and what keeps me going."
 
 ## My Philosophy
 
+I was born into a humble family in a small village where we didn’t even have electricity. My parents were daily wage earners, working tirelessly just to make ends meet.
+I began my education in a government school, and later, my parents moved to a nearby town so my sister and I could get a better education, while they worked even harder to manage our expenses.
+In 12th grade, I stayed in a hostel. After that, I decided to move to Hyderabad to pursue a B.Tech., dreaming of working part-time to support myself. But since my college was far from the city, that didn’t work out. So, I shared a small room with friends to minimise expenses and stayed focused on completing my degree.
+I didn’t have much growing up — no bicycle, no video games, not even a cricket bat. But what I did have was love, resilience, and unforgettable childhood memories.
+Fast forward to today —
+ I live in one of the best cities in the world, work for an MNC, and have a home, car, and a beautiful family.
+And here’s the truth:
+ I was never a topper.
+ I was never the most talented.
+ But I was consistent, curious, and grateful for every opportunity that came my way.
+My parents never pressured me to achieve something big — they simply gave me freedom and trust, and that made all the difference.
+👉 You don’t need to be extraordinary to build a remarkable life.
+ All you need is freedom, time, consistency, and the courage to take small steps every single day.
+
 ✨ Embracing Change for Personal Growth ✨
 
 Reflecting on my journey, I used to immerse myself in motivational quotes and videos whenever I hit a low point. However, I realized that despite the inspiration, I wasn't implementing these lessons in my life. It's easy to get lost in the multitude of advice and struggle to commit to a single change.
@@ -48,7 +62,24 @@ I enjoyed this process rather than clearing the certification exam; you should b
 This certification gave me confidence in the process that I tried for the first time.
 I can set and apply a similar process for other things, like upskilling, another certification, a workout, etc.. without worrying about the result, as I always believe in the process that I set.
 
-
+Ordinary Student’s (My) Journey 🎓➡️💼
+The school where I studied till the 10th doesn’t exist anymore.
+ The intermediate college where I did my 12th — gone too.
+ Even the engineering college where I completed my B. Tech was eventually shut down due to management issues.
+But you know what still exists?
+ 👉 The certificates I earned.
+ 👉 The lessons I learned.
+ 👉 And the journey that shaped me.
+I was an average student, the first graduate in my family, and had no one to guide me in my studies. I chose B.Tech simply because my friends did — no grand vision, no clear goal.
+My real education, however, came from the experiences — studying in Rayalaseema (Kadapa) till 10th, Coastal Andhra (Nellore) for 12th, and Telangana (Hyderabad) for B. Tech. These journeys helped me meet people from diverse backgrounds and shaped my outlook on life.
+I never imagined working for an MNC or living in a city like Hyderabad. I didn’t have big dreams or clear goals — just a desire to keep moving forward and make the best out of every situation.
+Whatever I am today is the result of small, consistent decisions, learning from people around me, and never stopping, even when things were unclear.
+If I could go back to my school days, I’d study with purpose, clarity, and passion. But life taught me something important —
+🎯 It’s never too late to start dreaming big or working towards something meaningful.
+🎯 It’s okay if you don’t have everything figured out right now.
+🎯 What matters is that you keep learning, stay curious, and make the most of every opportunity that comes your way.
+🎯 Your journey may start small — but your mindset decides how far you’ll go.
+Keep believing, keep building — one step at a time. 💪
 
 
 Add details about:

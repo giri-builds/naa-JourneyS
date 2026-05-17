@@ -17,19 +17,132 @@ interface Props {
 }
 
 const { sections } = Astro.props;
+
+const BIRTH_YEAR = 1989;
+
+function naturalAge(dateRange: string): number | null {
+  if (/birth/i.test(dateRange)) return 0;
+  const ageMatch = dateRange.match(/Age\s+(\d+)/i);
+  if (ageMatch) return Number(ageMatch[1]);
+  const yearMatch = dateRange.match(/(\d{4})/);
+  if (yearMatch) return Number(yearMatch[1]) - BIRTH_YEAR;
+  return null;
+}
+
+const inOrder = sections.slice().sort((a, b) => a.data.order - b.data.order);
+
+const MIN_SPACING = 3;
+let prev = -MIN_SPACING;
+const points = inOrder.map((s) => {
+  let age = naturalAge(s.data.dateRange);
+  if (age === null || age < prev + MIN_SPACING) age = prev + MIN_SPACING;
+  prev = age;
+  return { ...s, age, year: BIRTH_YEAR + age };
+});
+
+const W = 1600;
+const H = 520;
+const padX = 110;
+const padTop = 150;
+const padBottom = 110;
+
+const maxAge = Math.max(...points.map((p) => p.age)) + 2;
+const minAge = 0;
+const minYear = BIRTH_YEAR;
+const maxYear = BIRTH_YEAR + maxAge;
+
+const xFor = (age: number) =>
+  padX + ((age - minAge) / (maxAge - minAge)) * (W - padX * 2);
+const yFor = (year: number) =>
+  H - padBottom - ((year - minYear) / (maxYear - minYear)) * (H - padTop - padBottom);
+
+const placed = points.map((p) => ({ ...p, px: xFor(p.age), py: yFor(p.year) }));
+
+function roadPath(pts: { px: number; py: number }[]): string {
+  if (pts.length < 2) return '';
+  const d: string[] = [`M ${pts[0].px.toFixed(1)} ${pts[0].py.toFixed(1)}`];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const a = pts[i];
+    const b = pts[i + 1];
+    const dx = b.px - a.px;
+    const dy = b.py - a.py;
+    const len = Math.hypot(dx, dy) || 1;
+    const nx = -dy / len;
+    const ny = dx / len;
+    const bend = (i % 2 === 0 ? 1 : -1) * Math.min(55, len * 0.25);
+    const c1x = a.px + dx * 0.33 + nx * bend;
+    const c1y = a.py + dy * 0.33 + ny * bend;
+    const c2x = a.px + dx * 0.67 + nx * bend;
+    const c2y = a.py + dy * 0.67 + ny * bend;
+    d.push(
+      `C ${c1x.toFixed(1)} ${c1y.toFixed(1)}, ${c2x.toFixed(1)} ${c2y.toFixed(1)}, ${b.px.toFixed(1)} ${b.py.toFixed(1)}`,
+    );
+  }
+  return d.join(' ');
+}
+
+const pathD = roadPath(placed);
 ---
+
 <section class="py-8">
-  <h2 class="mb-8 text-center text-2xl font-bold text-primary dark:text-accent">Life Timeline</h2>
-  <div class="relative border-l-2 border-primary/30 dark:border-accent/30 ml-4 md:ml-0 md:mx-auto md:max-w-2xl">
-    {sections.map((section, i) => (
-      <a href={`${base}${section.id}`} class="group relative mb-8 block pl-8">
-        <div class="absolute -left-[9px] top-1 h-4 w-4 rounded-full border-2 border-primary bg-white group-hover:bg-primary dark:border-accent dark:bg-slate-900 dark:group-hover:bg-accent"></div>
-        <p class="text-xs text-text-muted dark:text-slate-500">{section.data.dateRange}</p>
-        <h3 class="text-lg font-semibold group-hover:text-primary dark:group-hover:text-accent">
-          {section.data.title}
-        </h3>
-        <p class="text-sm text-text-muted dark:text-slate-400">{section.data.summary}</p>
-      </a>
-    ))}
+  <h2 class="mb-2 text-center text-2xl font-bold text-primary dark:text-accent">Life Timeline</h2>
+  <p class="mb-6 text-center text-xs text-text-muted dark:text-slate-500">
+    Hover any milestone for details &middot; scroll sideways on small screens
+  </p>
+
+  <div class="relative -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0">
+    <div class="relative mx-auto" style={`width: ${W}px; height: ${H}px; min-width: ${W}px;`}>
+      <svg viewBox={`0 0 ${W} ${H}`} class="absolute inset-0 h-full w-full" aria-hidden="true">
+        <defs>
+          <linearGradient id="road-edge" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stop-color="#64748b" stop-opacity="0.55" />
+            <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.85" />
+          </linearGradient>
+          <linearGradient id="road-body" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1e293b" />
+            <stop offset="100%" stop-color="#0f172a" />
+          </linearGradient>
+        </defs>
+        <path d={pathD} fill="none" stroke="url(#road-edge)" stroke-width="38" stroke-linecap="round" stroke-linejoin="round" />
+        <path d={pathD} fill="none" stroke="url(#road-body)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+        <path d={pathD} fill="none" stroke="#facc15" stroke-width="2" stroke-dasharray="14 12" stroke-linecap="round" opacity="0.85" />
+      </svg>
+
+      <span class="pointer-events-none absolute left-3 top-3 text-[11px] font-medium uppercase tracking-wider text-text-muted dark:text-slate-500">
+        &uarr; Years
+      </span>
+      <span class="pointer-events-none absolute bottom-3 right-4 text-[11px] font-medium uppercase tracking-wider text-text-muted dark:text-slate-500">
+        Age &rarr;
+      </span>
+
+      {placed.map((p, i) => {
+        const above = i % 2 === 0;
+        const labelPos = above ? 'bottom-[18px]' : 'top-[18px]';
+        const popoverPos = above ? 'top-[18px]' : 'bottom-[18px]';
+        return (
+          <a
+            href={`${base}${p.id}`}
+            class="group absolute z-10 inline-block hover:z-30 focus:z-30"
+            style={`left: ${p.px}px; top: ${p.py}px; transform: translate(-50%, -50%);`}
+          >
+            <span class="block h-4 w-4 rounded-full border-2 border-white bg-primary shadow-[0_0_18px_rgba(34,211,238,0.65)] transition-transform group-hover:scale-125 dark:border-slate-900 dark:bg-accent"></span>
+
+            <div class={`absolute left-1/2 w-36 -translate-x-1/2 text-center ${labelPos}`}>
+              <p class="line-clamp-2 text-sm font-semibold text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-accent">
+                {p.data.title}
+              </p>
+              <p class="text-[11px] text-text-muted dark:text-slate-400">{p.data.dateRange}</p>
+            </div>
+
+            <div class={`pointer-events-none absolute left-1/2 w-60 -translate-x-1/2 rounded-lg border border-border bg-white p-3 text-left text-xs leading-snug text-text-muted opacity-0 shadow-xl transition-opacity duration-150 group-hover:opacity-100 group-focus:opacity-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 ${popoverPos}`}>
+              <p class="mb-1 text-[10px] font-semibold uppercase tracking-wider text-primary dark:text-accent">
+                {p.data.category}
+              </p>
+              {p.data.summary}
+            </div>
+          </a>
+        );
+      })}
+    </div>
   </div>
 </section>
