@@ -1,0 +1,56 @@
+name: AI Review
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to review"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  review:
+    if: >-
+      github.event_name == 'pull_request' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.pull_request &&
+       startsWith(github.event.comment.body, '/review'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    name: AI Review
+
+    steps:
+      - name: Resolve PR number
+        id: pr
+        run: |
+          case "${{ github.event_name }}" in
+            pull_request) echo "number=${{ github.event.pull_request.number }}" >> "$GITHUB_OUTPUT" ;;
+            issue_comment) echo "number=${{ github.event.issue.number }}" >> "$GITHUB_OUTPUT" ;;
+            workflow_dispatch) echo "number=${{ inputs.pr_number }}" >> "$GITHUB_OUTPUT" ;;
+          esac
+
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+
+      - name: Run AI review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Default skips Pro (free quota often 0). Override via secret if you have Pro access.
+          GEMINI_MODELS: ${{ secrets.GEMINI_MODELS || 'gemini-2.5-flash,gemini-1.5-flash' }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
+        run: npx -y tsx scripts/ai-review/index.ts
