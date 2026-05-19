@@ -2,6 +2,8 @@
 title: "Thoughts & Motivations"
 order: 10
 dateRange: "Timeless"
+yearRange: "Timeless"
+place: "Reflections"
 category: "philosophy"
 summary: "Core beliefs, motivations, and what keeps me going."
 ---

@@ -1,7 +1,9 @@
 ---
 title: "Graduation"
 order: 4
-dateRange: "Age 17 — Age 21"
+dateRange: "Age 17 - Age 21"
+yearRange: "2007 - 2011"
+place: "Hyderabad"
 category: "education"
 summary: "University life — academics, independence, and professional preparation."
 ---

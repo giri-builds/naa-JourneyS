@@ -3,10 +3,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Timeline from '../components/Timeline.astro';
 import Globe from '../components/Globe.astro';
 import ChatWidget from '../components/ChatWidget.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const sections = await getCollection('journey');
 const sorted = sections.sort((a, b) => a.data.order - b.data.order);
+
+const rendered = await Promise.all(
+  sorted.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
 ---
 <BaseLayout title="Home">
   <section class="pt-4 pb-6 md:pt-8 md:pb-8">
@@ -19,11 +23,11 @@ const sorted = sections.sort((a, b) => a.data.order - b.data.order);
           A personal chronicle &mdash; from the very beginning to where I stand today.
         </p>
         <p class="mt-3 max-w-2xl text-sm text-slate-400">
-          Explore my life sections below, or ask the chatbot anything about my journey.
+          Click any milestone on the timeline to read that section below.
         </p>
         <div class="mt-8 flex flex-wrap gap-4">
-          <a href={`${import.meta.env.BASE_URL}journey`} class="btn-primary">Read the Journey</a>
-          <a href="#timeline" class="btn-secondary">View Timeline</a>
+          <a href="#timeline" class="btn-primary">View Timeline</a>
+          <a href="#section-01-early-life" class="btn-secondary">Start Reading</a>
         </div>
       </div>
       <div class="hidden lg:block">
@@ -36,5 +40,45 @@ const sorted = sections.sort((a, b) => a.data.order - b.data.order);
     <Timeline sections={sorted} />
   </div>
 
+  <section class="mt-12 space-y-0">
+    {rendered.map(({ entry, Content }) => (
+      <article
+        id={`section-${entry.id}`}
+        class="scroll-mt-32 border-t border-border/40 dark:border-slate-700/40"
+      >
+        <header class="sticky top-[57px] z-20 -mx-6 border-b border-border/40 bg-surface-dark/85 px-6 py-4 backdrop-blur dark:border-slate-700/40 md:-mx-10 md:px-10">
+          <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 dark:text-accent/80">
+            {entry.data.category}
+          </p>
+          <h2 class="mt-1 text-2xl font-bold text-primary dark:text-accent md:text-3xl">
+            {entry.data.title}
+          </h2>
+          <p class="mt-1 text-sm leading-tight text-text-muted dark:text-slate-400">
+            {entry.data.dateRange}
+            <span class="mx-2 text-slate-600">·</span>
+            {entry.data.yearRange}
+            <span class="mx-2 text-slate-600">·</span>
+            <span class="font-medium text-primary/80 dark:text-accent/80">{entry.data.place}</span>
+          </p>
+        </header>
+        <div class="journey-content max-w-3xl px-1 py-8 md:px-2">
+          <Content />
+        </div>
+      </article>
+    ))}
+  </section>
+
   <ChatWidget slot="chat-widget" />
 </BaseLayout>
+
+<style is:global>
+  .journey-content { color: rgb(226 232 240); line-height: 1.7; }
+  .journey-content h2 { font-size: 1.5rem; font-weight: 700; color: rgb(34 211 238); margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  .journey-content h3 { font-size: 1.25rem; font-weight: 600; color: rgb(56 189 248); margin-top: 1.25rem; margin-bottom: 0.5rem; }
+  .journey-content p { margin-bottom: 1rem; }
+  .journey-content ul, .journey-content ol { margin: 0.75rem 0 1rem 1.5rem; }
+  .journey-content li { margin-bottom: 0.35rem; }
+  .journey-content strong { color: rgb(241 245 249); }
+  .journey-content a { color: rgb(34 211 238); text-decoration: underline; text-underline-offset: 3px; }
+  .journey-content code { background: rgb(15 23 42); padding: 0.1rem 0.35rem; border-radius: 4px; font-size: 0.9em; }
+</style>
