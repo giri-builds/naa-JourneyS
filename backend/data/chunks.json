@@ -3,8 +3,8 @@
     "text": "## Where It Began\n\nI born in a villege called Chennavaram, 2 km from the town called Porumamilla. My mother name Subhan Bee and father name is Imamsab, both used to work as daily labours, I have one elder sister Asin. I started my education in a Govt school at the age of 6 and studied in the same villege till 3rd standard. My parents moved to the town Yerraguntla in 1998 to give better education to me and my sister.",
     "metadata": {
       "source": "01-early-life.md",
-      "title": "Early Life",
-      "dateRange": "Birth \u2014 Age 5",
+      "title": "\ud83d\udc76 Early Life",
+      "dateRange": "Birth - Age 5",
       "category": "childhood"
     }
   },
@@ -12,8 +12,8 @@
     "text": "I enjoyed my childhood in a villege where there was no proper electrity and other facilities like roads, etc. I used to play a lot in my villege, enjoyed the villege life fully till I turned 9 years of age.\n\nName: Dastagiri Vadapalli\nDate of Birth: October 1, 1989\nPlace: Chennavaram, Porumamilla\nDistrict: Kadapa (Rayalaseema)",
     "metadata": {
       "source": "01-early-life.md",
-      "title": "Early Life",
-      "dateRange": "Birth \u2014 Age 5",
+      "title": "\ud83d\udc76 Early Life",
+      "dateRange": "Birth - Age 5",
       "category": "childhood"
     }
   },
@@ -21,8 +21,8 @@
     "text": "## School Days\n\nI joined in the Pvt school Sri Vijayavani Vidyanikethan in the 4th standard in the year 1998 and completed my S.S.C in the same school in 2005 and secured 510/600 marks.\n\nI made good friends in the school, I was elected as a SPL (School Peaople Leader) during 9th standard and did justice to my role.\n\nPlace: Yerraguntla\nDistrict: Kadapa (Rayalaseema)",
     "metadata": {
       "source": "02-schooling.md",
-      "title": "Schooling",
-      "dateRange": "Age 6 \u2014 Age 16",
+      "title": "\ud83c\udf92 Schooling",
+      "dateRange": "Age 6 - Age 16",
       "category": "education"
     }
   },
@@ -30,8 +30,8 @@
     "text": "## +2 / Intermediate\n\nI joined Ratnam Resindential Junior College (KORA) for my Intermediate (+2).\nI studied in this college from 2005 to 2007 and secured 924/1000 marks.\nI stayed in a hostel for these two years and make some good friends.\n\nPlace: Pidathapolur\nDistrict: Nellore (Coastal)",
     "metadata": {
       "source": "03-higher-secondary.md",
-      "title": "Higher Secondary (+2)",
-      "dateRange": "Age 15 \u2014 Age 17",
+      "title": "\ud83d\udcda Intermediate",
+      "dateRange": "Age 15 - Age 17",
       "category": "education"
     }
   },
@@ -39,8 +39,8 @@
     "text": "## University Years\n\nI joined Vivekananda Institute of Engineering and Technology college for my Graduation in the year 2007 and completed it in 2011 with 68% \nPlace: Bogaram Village\nMandal: Keesara\nCity: Hyderabad (Telangana)\n\nLater i did PGDB in Manipal University from August 2013 to April 2014.\nPlace: Chokkanahalli\nCity: Bangalore",
     "metadata": {
       "source": "04-graduation.md",
-      "title": "Graduation",
-      "dateRange": "Age 17 \u2014 Age 21",
+      "title": "\ud83c\udf93 Graduation",
+      "dateRange": "Age 17 - Age 21",
       "category": "education"
     }
   },
@@ -48,8 +48,8 @@
     "text": "## Career Path\n\nData Analyst\nICICI Bank Limited | May 2014 - July 2016\n\u2022 Developed optimized SQL queries for data extraction and collaborated with stakeholders to gather data requirements.\n\u2022 Delivered reports and dashboards using TIBCO Spotfire to support business analysis, campaign execution, and performance monitoring.",
     "metadata": {
       "source": "05-work-experience.md",
-      "title": "Work Experience",
-      "dateRange": "Age 21 \u2014 Present",
+      "title": "\ud83d\udcbc Work Experience",
+      "dateRange": "Age 24 - Present",
       "category": "career"
     }
   },
@@ -57,8 +57,8 @@
     "text": "Data Engineer\nValue Labs | Client: Nielsen - Media | December 2016 - September 2022\n\u2022 Led reporting team delivering near real-time user and usage data insights using Big Data technologies (Hadoop, Spark, Hive).\n\u2022 Migrated on-premises Big Data infrastructure to AWS (EMR, EC2, RDS, Athena, Lambda) for scalable data processing and analytics.\n\u2022 Built Hive/Spark jobs within Oozie workflows, optimized SQL performance, and enabled ad-hoc querying through Athena and Lambda.",
     "metadata": {
       "source": "05-work-experience.md",
-      "title": "Work Experience",
-      "dateRange": "Age 21 \u2014 Present",
+      "title": "\ud83d\udcbc Work Experience",
+      "dateRange": "Age 24 - Present",
       "category": "career"
     }
   },
@@ -66,8 +66,8 @@
     "text": "Senior Data Engineer\nValue Labs | Client: eyos.one - Retail | October 2022 - September 2023\n\u2022 Developed real-time and batch ETL pipelines to load data into MySQL and Snowflake, including Spark Streaming archival from S3 file sources.\n\u2022 Built scalable, config-driven solutions to process sales data from various file formats and schemas.\n\u2022 Created Python automation jobs for data aggregation and transformation; developed AWS Lambda functions for serverless task automation.",
     "metadata": {
       "source": "05-work-experience.md",
-      "title": "Work Experience",
-      "dateRange": "Age 21 \u2014 Present",
+      "title": "\ud83d\udcbc Work Experience",
+      "dateRange": "Age 24 - Present",
       "category": "career"
     }
   },
@@ -75,8 +75,8 @@
     "text": "Senior Data Engineer\nValue Labs | Client: Nielsen - Media | October 2023 - July 2024\n\u2022 Designed and developed scalable data ingestion pipelines using PySpark and SQL within Dockerized Python images, integrated with Airflow for S3/Data Lake extraction.\n\u2022 Built complex PySpark workflows for data transformation and cleaning supporting analytics and ML use cases, executed on AWS EMR and Kubernetes (EKS).\n\u2022 Developed and maintained data warehouse solutions using HiveQL and Spark SQL with monitoring and alerting for job reliability and data quality.\n\u2022 Collaborated with data scientists and analysts to deliver clean datasets; built dashboards in Superset and Spotfire for daily operational trend visualization.",
     "metadata": {
       "source": "05-work-experience.md",
-      "title": "Work Experience",
-      "dateRange": "Age 21 \u2014 Present",
+      "title": "\ud83d\udcbc Work Experience",
+      "dateRange": "Age 24 - Present",
       "category": "career"
     }
   },
@@ -84,8 +84,8 @@
     "text": "Lead Engineer - Software Development (AI & Platform Engineering)\nQuest Global | Client: Apple - Ad Platforms | August 2024 - Present\n\u2022 Developed Ads Airflow MCP Server providing Claude AI direct read-only access to Ads Airflow environments, enabling AI-assisted infrastructure monitoring and debugging.\n\u2022 Built AI-assisted code migration tool using RAG + multi-phase agentic pipeline (Claude Opus, Qdrant, LibCST) to automate Airflow 2.9.2 to 3.2.0 DAG migration across 100+ production DAGs, reducing manual effort by 80%.\n\u2022 Developed an On-call (L1) Support AI Skill integrating multiple MCPs (PagerDuty, Slack, Splunk, Grafana) for automated alert debugging and resolution.\n\u2022 Fine-tuned a RAG chatbot to handle consumer queries on Ads Airflow Slack support channel, reducing response time by 60% using curated documentation as knowledge base.\n\u2022 Built LLM-maintained knowledge wiki using Claude Code with schema-driven extraction pipeline, generating browsable Wikipedia-style static HTML from raw sources (PDFs, markdown, HTML).\n\u2022 Deployed and maintained end-to-end Apache Airflow data pipelines on Kubernetes (AWS EKS), achieving 99.99% uptime through optimized scheduling, Helm upgrades, executor tuning, and autoscaling.\n\u2022 Containerized Airflow components with Docker and built CI/CD pipelines for reproducible deployments across dev/stg/prod environments.\n\u2022 Implemented monitoring, alerting, and logging with Datadog/Grafana and Splunk; proactively troubleshot DAG failures, Kubernetes bottlenecks, and infrastructure incidents.\n\u2022 Provided 24/7 production support including DAG deployment issues, failure investigations, and workflow debugging for onboarded teams.",
     "metadata": {
       "source": "05-work-experience.md",
-      "title": "Work Experience",
-      "dateRange": "Age 21 \u2014 Present",
+      "title": "\ud83d\udcbc Work Experience",
+      "dateRange": "Age 24 - Present",
       "category": "career"
     }
   },
@@ -93,8 +93,8 @@
     "text": "## Married Life\n\nI got married on July 11, 2018.\nSpouse Name: Parveen\nPlace: Badvel\nDistrict: Kadapa",
     "metadata": {
       "source": "06-married-life.md",
-      "title": "Married Life",
-      "dateRange": "2018 \u2014 Present",
+      "title": "\ud83d\udc8d Married Life",
+      "dateRange": "Age 28 - Present",
       "category": "personal"
     }
   },
@@ -102,8 +102,8 @@
     "text": "## Parenthood\n\nI have two kids (Boys)\n\nElder Son - \nName: Shayan\nDOB: August 27, 2020\nNick Name: kiwi\n\nYounger Son - \nName: Nehan\nDOB: December 18, 2023\nNick Name: wiki",
     "metadata": {
       "source": "07-kids.md",
-      "title": "Kids",
-      "dateRange": "2020 \u2014 Present",
+      "title": "\ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc66 Kids",
+      "dateRange": "Age 30 - Present",
       "category": "personal"
     }
   },
@@ -111,8 +111,8 @@
     "text": "## Financial Journey\n\nMy financial jpourney started with my First Job at ICICI Bank.\n\nI have a own house in my home town Yerraguntla, construction completed in the year 2017.\nI have a car, CUV, Ford Freestyle, Diesel, 1.5 cc purchased in the year 2019.\nI have a purchased a new 2 BHK flat in Hyderabad in December, 2025.",
     "metadata": {
       "source": "08-networth.md",
-      "title": "Net Worth & Financial Journey",
-      "dateRange": "Career start \u2014 Present",
+      "title": "\ud83d\udcb0 Net Worth & Financial Journey",
+      "dateRange": "Age 24 - Present",
       "category": "finance"
     }
   },
@@ -120,8 +120,8 @@
     "text": "10 Years, 10 Milestones \u2013 A Journey of Growth & Gratitude \ud83d\ude80\nLooking back at the last decade, I realize how much life has transformed \u2013 both personally and professionally. Here are some defining moments that shaped my journey:\n1\ufe0f\u20e3 Switched to Data Engineering \u2013 1st job change (2016)\n 2\ufe0f\u20e3 Built our first family home in my hometown (2017)\n 3\ufe0f\u20e3 Got married (2018)\n 4\ufe0f\u20e3 Purchased my first car after 5 years of patience (2019)\n 5\ufe0f\u20e3 Welcomed our first baby boy (2020)\n 6\ufe0f\u20e3 Upgraded to an iPhone after 7 years of waiting (2022)\n 7\ufe0f\u20e3 Welcomed our second baby boy (2023)\n 8\ufe0f\u20e3 2nd job change to continue growing (2024)\n 9\ufe0f\u20e3 Achieved a 9x salary growth compared to my first paycheck\n \ud83d\udd1f And the one thing that didn\u2019t change in all these years \u2013 my weight! (2025) \ud83d\ude05\nThis journey reminds me that progress comes in many forms \u2014 career, family, financial growth, and personal milestones. While some goals take time, patience and consistency always pay off.\nHere\u2019s to the next decade of growth, learning, and maybe\u2026 cracking that weight challenge too! \ud83d\udcaa\u2728",
     "metadata": {
       "source": "08-networth.md",
-      "title": "Net Worth & Financial Journey",
-      "dateRange": "Career start \u2014 Present",
+      "title": "\ud83d\udcb0 Net Worth & Financial Journey",
+      "dateRange": "Age 24 - Present",
       "category": "finance"
     }
   },
@@ -129,8 +129,8 @@
     "text": "Add details about:\n- Financial starting point\n- Investment philosophy\n- Key financial decisions\n- Milestones achieved\n- Lessons learned about money",
     "metadata": {
       "source": "08-networth.md",
-      "title": "Net Worth & Financial Journey",
-      "dateRange": "Career start \u2014 Present",
+      "title": "\ud83d\udcb0 Net Worth & Financial Journey",
+      "dateRange": "Age 24 - Present",
       "category": "finance"
     }
   },
@@ -138,8 +138,8 @@
     "text": "## Looking Ahead\n\nMy short-term ambition is to land in to a AI Engineer role with good CTC by the end of the year 2026.\nGet out of the EMI's by end of 2030 or have minimum of less than 40% of your salary.\n\nCareer aspiration is to do the M.tech from IIT Madras in AI/ML \nStart a company in home town to help the under privileged talented students to achieve their goals and land in their dream career",
     "metadata": {
       "source": "09-ambitions.md",
-      "title": "Ambitions",
-      "dateRange": "Present \u2014 Future",
+      "title": "\ud83d\ude80 Ambitions",
+      "dateRange": "Age 36 - Future",
       "category": "aspirations"
     }
   },
@@ -147,8 +147,8 @@
     "text": "When I was a kid, I dreamed of becoming a Police Officer.\n My father often spoke about the bravery of officers \u2014 especially Umesh Chandra, IPS \u2014 and those stories left a deep impression on me. I imagined myself wearing that uniform one day.\nBut dreams alone aren\u2019t enough. I had no idea how to become an IPS officer \u2014 no one to guide me, and I never asked my teachers either. Deep down, I also knew my parents couldn\u2019t afford the expenses for such preparation.\nSo, like many others around me, I followed the crowd.\n My sister casually mentioned that most students were taking M.P.C. and doing Engineering. I did the same \u2014 without questioning whether it aligned with my dream.\n\ud83c\udf93 Fast forward to my final year of Engineering \u2014 our college didn\u2019t have campus placements, and reality hit hard. I suddenly remembered my childhood dream and started exploring police recruitment exams.\nI applied for the Indian Air Force, cleared the written test with limited preparation, and got shortlisted for the SSB interview.\n That was my first-ever interview. I travelled to Mysore, stayed overnight at the railway station, and reported at 6 AM sharp \u2014 only to find hundreds of talented candidates from all over India.\nI gave my best, but I wasn\u2019t confident enough.\n I struggled during group discussions and was ultimately rejected. That was my first failure.\nSoon after, the Andhra Pradesh Government released the Sub-Inspector (SI) recruitment notification in 2011, the same year I graduated. I saw it as a second chance.\nI trained hard for the physical tests \u2014 5 km run, 100 m sprint, 800 m run, long jump, high jump, and shot put. I completed the 5 km run in 20 minutes (against the 25-minute limit) and scored merit in events.\nNow, all that stood between me and my dream was the final written test \u2014",
     "metadata": {
       "source": "09-ambitions.md",
-      "title": "Ambitions",
-      "dateRange": "Present \u2014 Future",
+      "title": "\ud83d\ude80 Ambitions",
+      "dateRange": "Age 36 - Future",
       "category": "aspirations"
     }
   },
@@ -156,8 +156,8 @@
     "text": "Paper 1: Arithmetic & Reasoning \u2705 (my strong area)\n\nPaper 2: General Studies \u274c (my weak area \u2014 History, Geography, Economy, Current Affairs)",
     "metadata": {
       "source": "09-ambitions.md",
-      "title": "Ambitions",
-      "dateRange": "Present \u2014 Future",
+      "title": "\ud83d\ude80 Ambitions",
+      "dateRange": "Age 36 - Future",
       "category": "aspirations"
     }
   },
@@ -165,8 +165,8 @@
     "text": "For the first time, the exam introduced negative marking. I did well in Paper 1 but struggled in Paper 2. When the results came, I fell 10 marks short \u2014 only because of negative marking.\nIf not for that change, I might have been wearing the uniform I once dreamed of.\nThat was my second failure.\nI had already spent two years after graduation preparing for this goal. The next notification was delayed due to the Telangana bifurcation, and I couldn\u2019t afford to wait any longer. My parents needed financial support, so I took a different path \u2014 IT.\nI later realized the real mistake wasn\u2019t failure \u2014 it was not knowing the right path early enough.\n If I had spoken to a Police Officer or career counsellor, I would\u2019ve known that to become an SI, it\u2019s better to take H.E.C. in 12th and pursue a B.A. degree (History, Economics, Civics, Political Science, Sociology).\nI learned it the hard way \u2014 too late to apply it.\nToday, I\u2019m happy with my job, my growth, and my career in IT. But every time I see a Police Officer, I can\u2019t help but remember that boyhood dream and the mistakes that shaped my journey.\nTo every student or youngster reading this \ud83d\udc47\nDon\u2019t just follow the crowd.\nDon\u2019t choose a path because everyone else does.\nAsk questions, seek guidance, and learn early what it takes to reach your goal.\nYour dreams deserve clarity \u2014 not confusion.\nAnd remember: failure doesn\u2019t define you \u2014 lack of direction does.",
     "metadata": {
       "source": "09-ambitions.md",
-      "title": "Ambitions",
-      "dateRange": "Present \u2014 Future",
+      "title": "\ud83d\ude80 Ambitions",
+      "dateRange": "Age 36 - Future",
       "category": "aspirations"
     }
   },
@@ -174,8 +174,8 @@
     "text": "Add details about:\n- Short-term goals\n- Long-term vision\n- Career aspirations\n- Personal growth targets\n- Legacy you want to build",
     "metadata": {
       "source": "09-ambitions.md",
-      "title": "Ambitions",
-      "dateRange": "Present \u2014 Future",
+      "title": "\ud83d\ude80 Ambitions",
+      "dateRange": "Age 36 - Future",
       "category": "aspirations"
     }
   },
@@ -183,7 +183,7 @@
     "text": "## My Philosophy",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -192,7 +192,7 @@
     "text": "I was born into a humble family in a small village where we didn\u2019t even have electricity. My parents were daily wage earners, working tirelessly just to make ends meet.\nI began my education in a government school, and later, my parents moved to a nearby town so my sister and I could get a better education, while they worked even harder to manage our expenses.\nIn 12th grade, I stayed in a hostel. After that, I decided to move to Hyderabad to pursue a B.Tech., dreaming of working part-time to support myself. But since my college was far from the city, that didn\u2019t work out. So, I shared a small room with friends to minimise expenses and stayed focused on completing my degree.\nI didn\u2019t have much growing up \u2014 no bicycle, no video games, not even a cricket bat. But what I did have was love, resilience, and unforgettable childhood memories.\nFast forward to today \u2014\n I live in one of the best cities in the world, work for an MNC, and have a home, car, and a beautiful family.\nAnd here\u2019s the truth:\n I was never a topper.\n I was never the most talented.\n But I was consistent, curious, and grateful for every opportunity that came my way.\nMy parents never pressured me to achieve something big \u2014 they simply gave me freedom and trust, and that made all the difference.\n\ud83d\udc49 You don\u2019t need to be extraordinary to build a remarkable life.\n All you need is freedom, time, consistency, and the courage to take small steps every single day.",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -201,7 +201,7 @@
     "text": "\u2728 Embracing Change for Personal Growth \u2728\n\nReflecting on my journey, I used to immerse myself in motivational quotes and videos whenever I hit a low point. However, I realized that despite the inspiration, I wasn't implementing these lessons in my life. It's easy to get lost in the multitude of advice and struggle to commit to a single change.",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -210,7 +210,7 @@
     "text": "Growing up, I unintentionally followed this pattern, never truly committing to any transformation. Recently, I had an awakening about this cycle and decided to break free from it. I made a conscious choice to stop merely reading quotes and, instead, vowed to implement every insight into my daily life.\n\nThat decision led me to a profound quote on LinkedIn that resonated deeply with me:\n\n\" Without commitment, you will never start..\nwithout consistency, you will never finish.. \"",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -219,7 +219,7 @@
     "text": "It struck a chord, and I made a firm commitment to apply this principle in my life.\n\nToday, I encourage you to reflect on your own journey. Are you simply consuming motivational content, or are you actively incorporating those lessons into your life? Let's make a collective effort to not just start, but to commit and stay consistent on our paths to personal growth. Remember, it's through commitment and consistency that we truly bring about lasting change. \ud83d\udcaa\u2728",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -228,7 +228,7 @@
     "text": "From Dreams to Decisions: The Story Behind My First Home, Car & iPhone \ud83c\udfe0\ud83d\ude97\ud83d\udcf1\nWhen I started my first job, I was deeply fascinated by my colleagues\u2019 iPhones, Royal Enfield bikes, and cars. As an automobile enthusiast since childhood, I often imagined owning one myself. With some savings finally appearing in my account, I began planning to buy a Used Car and an iPhone.\nI had complete freedom \u2014 my parents never restricted my choices \u2014 yet something inside held me back. One day, it struck me: we were still living in a rented house and had never owned a home.\nThat thought changed everything.\nMy parents had invested their lifetime savings to buy a 1,100 sq. ft. plot, conduct my sister\u2019s marriage, and support my education. I was able to complete my graduation with a fee reimbursement facility and had no plans for further studies.\nThe very next day, I decided to apply for my first-ever bank loan \u2014 a home loan \u2014 to build a house for my parents on that land they had bought years ago. The day construction started remains one of the most fulfilling moments of my life.\nYears later, with steady career growth and salary hikes, I finally bought a New Car for my family and an iPhone for myself, achieving two long-awaited dreams \u2014 5 years and 7 years in the making.\nNo one guided me through this journey. I simply followed my instincts and a bit of common sense \u2014 to prioritize what truly matters before pursuing desires.\nIt taught me one important life lesson:\nFulfillment doesn\u2019t come from what we own, but from what we build for the people we love. \u2764\ufe0f",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -237,7 +237,7 @@
     "text": "Recently, I have cleared the AWS AI Practitioner Certification.\nI followed a simple process to prepare for this certification exam.\nFinding the time for preparation and committing to that time regularly is difficult in a typical busy week, managing work-life balance.\nI go to the office in a hybrid mode, 3 days a week, and it takes me two hours of travel time per day. I started spending those two hours of travel time when I\u2019m working from home for the certification preparation. With this, I managed to spend 4 hours a week on weekdays without sacrificing anything in my routine and managed to spend 2-3 hours more on weekends.",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -246,7 +246,7 @@
     "text": "I set this process and utilised this time mainly to learn new AI concepts that are necessary for certification, taking notes and refining them to post on LinkedIn so that others may benefit from it. I posted about 50+ posts on the concepts/topics that I learnt/prepared for the certification every week consistently, which helped me to revise the concepts whenever I needed and understand those concepts in another way.",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -255,7 +255,7 @@
     "text": "This certification and setting up the process for preparation and maintaining that consistency is an example of commitment to something. All you need to do is set the process and believe in it.\n\nI enjoyed this process rather than clearing the certification exam; you should believe in your process, whether you succeed or fail, the result doesn\u2019t matter.",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -264,7 +264,7 @@
     "text": "This certification gave me confidence in the process that I tried for the first time.\nI can set and apply a similar process for other things, like upskilling, another certification, a workout, etc.. without worrying about the result, as I always believe in the process that I set.",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -273,7 +273,7 @@
     "text": "Ordinary Student\u2019s (My) Journey \ud83c\udf93\u27a1\ufe0f\ud83d\udcbc\nThe school where I studied till the 10th doesn\u2019t exist anymore.\n The intermediate college where I did my 12th \u2014 gone too.\n Even the engineering college where I completed my B. Tech was eventually shut down due to management issues.\nBut you know what still exists?\n \ud83d\udc49 The certificates I earned.\n \ud83d\udc49 The lessons I learned.\n \ud83d\udc49 And the journey that shaped me.\nI was an average student, the first graduate in my family, and had no one to guide me in my studies. I chose B.Tech simply because my friends did \u2014 no grand vision, no clear goal.\nMy real education, however, came from the experiences \u2014 studying in Rayalaseema (Kadapa) till 10th, Coastal Andhra (Nellore) for 12th, and Telangana (Hyderabad) for B. Tech. These journeys helped me meet people from diverse backgrounds and shaped my outlook on life.\nI never imagined working for an MNC or living in a city like Hyderabad. I didn\u2019t have big dreams or clear goals \u2014 just a desire to keep moving forward and make the best out of every situation.\nWhatever I am today is the result of small, consistent decisions, learning from people around me, and never stopping, even when things were unclear.\nIf I could go back to my school days, I\u2019d study with purpose, clarity, and passion. But life taught me something important \u2014\n\ud83c\udfaf It\u2019s never too late to start dreaming big or working towards something meaningful.\n\ud83c\udfaf It\u2019s okay if you don\u2019t have everything figured out right now.\n\ud83c\udfaf What matters is that you keep learning, stay curious, and make the most of every opportunity that comes your way.\n\ud83c\udfaf Your journey may start small \u2014 but your mindset decides how far you\u2019ll go.\nKeep believing, keep building \u2014 one step at a time. \ud83d\udcaa",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
@@ -282,7 +282,7 @@
     "text": "Add details about:\n- Core values\n- Sources of motivation\n- Books/people that influenced you\n- Life philosophy\n- Advice you'd give your younger self",
     "metadata": {
       "source": "10-thoughts-motivations.md",
-      "title": "Thoughts & Motivations",
+      "title": "\ud83d\udcad Thoughts & Motivations",
       "dateRange": "Timeless",
       "category": "philosophy"
     }
