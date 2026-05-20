@@ -1,0 +1,79 @@
+---
+---
+<canvas id="cobe-globe-bg" class="globe-bg" aria-hidden="true"></canvas>
+
+<script>
+  import createGlobe from 'cobe';
+
+  const canvas = document.getElementById('cobe-globe-bg') as HTMLCanvasElement | null;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (canvas) {
+    let phi = 0;
+
+    const sizePx = () => Math.max(window.innerWidth, window.innerHeight) * 1.4;
+
+    const setSize = () => {
+      const s = sizePx();
+      canvas.width = s * 2;
+      canvas.height = s * 2;
+      canvas.style.width = `${s}px`;
+      canvas.style.height = `${s}px`;
+    };
+
+    const buildGlobe = () =>
+      createGlobe(canvas, {
+        devicePixelRatio: 2,
+        width: canvas.width,
+        height: canvas.height,
+        phi: 0,
+        theta: 0.25,
+        dark: 1,
+        diffuse: 1.4,
+        mapSamples: 16000,
+        mapBrightness: 6.5,
+        baseColor: [0.18, 0.45, 0.6],
+        markerColor: [0.13, 0.83, 0.93],
+        glowColor: [0.18, 0.78, 1.1],
+        markers: [
+          { location: [14.4673, 78.8242], size: 0.06 },
+          { location: [17.385, 78.4867], size: 0.07 },
+          { location: [13.0827, 80.2707], size: 0.05 },
+        ],
+        onRender: (state) => {
+          state.phi = phi;
+          if (!reduceMotion) phi += 0.0025;
+        },
+      });
+
+    setSize();
+    let globe = buildGlobe();
+
+    let resizeRaf = 0;
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(() => {
+        setSize();
+        globe.destroy();
+        globe = buildGlobe();
+      });
+    });
+  }
+</script>
+
+<style>
+  .globe-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -10;
+    opacity: 0.22;
+    pointer-events: none;
+    contain: layout paint size;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .globe-bg { opacity: 0.12; }
+  }
+</style>

@@ -1,7 +1,9 @@
 ---
 title: "Early Life"
 order: 1
-dateRange: "Birth — Age 5"
+dateRange: "Birth - Age 5"
+yearRange: "1989 - 1994"
+place: "Chennavaram"
 category: "childhood"
 summary: "The beginning of my story — where it all started."
 ---

@@ -1,7 +1,9 @@
 ---
 title: "Married Life"
 order: 6
-dateRange: "2018 — Present"
+dateRange: "Age 28 - Present"
+yearRange: "2018 - Present"
+place: "Hyderabad"
 category: "personal"
 summary: "Partnership, growth, and building a life together."
 ---

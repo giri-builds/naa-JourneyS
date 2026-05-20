@@ -1,7 +1,9 @@
 ---
 title: "Work Experience"
 order: 5
-dateRange: "Age 21 — Present"
+dateRange: "Age 24 - Present"
+yearRange: "2014 - Present"
+place: "Hyderabad"
 category: "career"
 summary: "Professional journey — roles, companies, growth, and impact."
 ---

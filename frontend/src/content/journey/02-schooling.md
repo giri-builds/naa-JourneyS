@@ -1,7 +1,9 @@
 ---
 title: "Schooling"
 order: 2
-dateRange: "Age 6 — Age 16"
+dateRange: "Age 6 - Age 16"
+yearRange: "1995 - 2005"
+place: "Yerraguntla"
 category: "education"
 summary: "School years — friendships, discoveries, and foundation building."
 ---

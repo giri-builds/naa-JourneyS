@@ -1,7 +1,9 @@
 ---
 title: "Net Worth & Financial Journey"
 order: 8
-dateRange: "Career start — Present"
+dateRange: "Age 24 - Present"
+yearRange: "2014 - Present"
+place: "Hyderabad"
 category: "finance"
 summary: "Financial growth, investments, and lessons in building wealth."
 ---
