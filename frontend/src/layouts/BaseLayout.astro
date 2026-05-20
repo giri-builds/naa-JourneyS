@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SocialLinks from '../components/SocialLinks.astro';
 import GlobeBackground from '../components/GlobeBackground.astro';
+import { interests } from '../data/profile';
 
 interface Props {
   title: string;
@@ -10,6 +11,7 @@ interface Props {
 
 const { title, description = "A personal life journey — from birth to present" } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const marqueeItems = [...interests, ...interests];
 ---
 <!doctype html>
 <html lang="en" class="dark">
@@ -28,9 +30,16 @@ const base = import.meta.env.BASE_URL;
   <body class="min-h-screen text-text dark:text-text-dark">
     <GlobeBackground />
     <header class="sticky top-0 z-40 border-b border-border bg-white/80 backdrop-blur dark:border-slate-700 dark:bg-slate-900/70">
-      <nav class="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-3 md:px-10">
-        <a href={base} class="text-xl font-bold text-primary dark:text-accent">naa-JourneyS</a>
-        <div class="hidden gap-6 md:flex">
+      <nav class="mx-auto flex max-w-[1500px] items-center gap-6 px-6 py-3 md:px-10">
+        <a href={base} class="shrink-0 text-xl font-bold text-primary dark:text-accent">naa-JourneyS</a>
+        <div class="marquee hidden flex-1 overflow-hidden md:block" aria-hidden="true">
+          <div class="marquee-track">
+            {marqueeItems.map((item) => (
+              <span class="marquee-item">{item}</span>
+            ))}
+          </div>
+        </div>
+        <div class="hidden shrink-0 gap-6 md:flex">
           <a href={base} class="text-sm hover:text-primary dark:hover:text-accent">Home</a>
           <a href={`${base}journey`} class="text-sm hover:text-primary dark:hover:text-accent">Journey</a>
         </div>
@@ -49,3 +58,31 @@ const base = import.meta.env.BASE_URL;
     <slot name="chat-widget" />
   </body>
 </html>
+
+<style is:global>
+  .marquee {
+    mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  }
+  .marquee-track {
+    display: inline-flex;
+    gap: 2.25rem;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee-scroll 180s linear infinite;
+  }
+  .marquee-item {
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    color: #94a3b8;
+    flex-shrink: 0;
+  }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+</style>
