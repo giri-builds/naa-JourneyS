@@ -1,5 +1,5 @@
 ---
-title: "Graduation"
+title: "🎓 Graduation"
 order: 4
 dateRange: "Age 17 - Age 21"
 yearRange: "2007 - 2011"

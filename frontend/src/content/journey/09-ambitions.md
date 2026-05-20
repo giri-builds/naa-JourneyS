@@ -1,5 +1,5 @@
 ---
-title: "Ambitions"
+title: "🚀 Ambitions"
 order: 9
 dateRange: "Age 36 - Future"
 yearRange: "2026 - Future"

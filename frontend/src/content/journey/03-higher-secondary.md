@@ -1,9 +1,9 @@
 ---
-title: "Higher Secondary (+2)"
+title: "📚 Intermediate"
 order: 3
 dateRange: "Age 15 - Age 17"
 yearRange: "2005 - 2007"
-place: "Pidathapolur"
+place: "Nellore"
 category: "education"
 summary: "Intermediate years — choosing a path and preparing for the future."
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Thoughts & Motivations"
+title: "💭 Thoughts & Motivations"
 order: 10
 dateRange: "Timeless"
 yearRange: "Timeless"

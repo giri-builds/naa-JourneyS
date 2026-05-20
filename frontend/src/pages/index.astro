@@ -40,36 +40,89 @@ const rendered = await Promise.all(
     <Timeline sections={sorted} />
   </div>
 
-  <section class="mt-12 space-y-0">
-    {rendered.map(({ entry, Content }) => (
-      <article
-        id={`section-${entry.id}`}
-        class="scroll-mt-32 border-t border-border/40 dark:border-slate-700/40"
-      >
-        <header class="sticky top-[57px] z-20 -mx-6 border-b border-border/40 bg-surface-dark/85 px-6 py-4 backdrop-blur dark:border-slate-700/40 md:-mx-10 md:px-10">
-          <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 dark:text-accent/80">
-            {entry.data.category}
-          </p>
-          <h2 class="mt-1 text-2xl font-bold text-primary dark:text-accent md:text-3xl">
-            {entry.data.title}
-          </h2>
-          <p class="mt-1 text-sm leading-tight text-text-muted dark:text-slate-400">
-            {entry.data.dateRange}
-            <span class="mx-2 text-slate-600">·</span>
-            {entry.data.yearRange}
-            <span class="mx-2 text-slate-600">·</span>
-            <span class="font-medium text-primary/80 dark:text-accent/80">{entry.data.place}</span>
-          </p>
-        </header>
-        <div class="journey-content max-w-3xl px-1 py-8 md:px-2">
-          <Content />
-        </div>
-      </article>
-    ))}
-  </section>
+  <div class="mt-12 lg:grid lg:grid-cols-[minmax(0,1fr)_220px] lg:gap-10">
+    <section class="space-y-0">
+      {rendered.map(({ entry, Content }) => (
+        <article
+          id={`section-${entry.id}`}
+          class="scroll-mt-32 border-t border-border/40 dark:border-slate-700/40"
+        >
+          <header class="sticky top-[57px] z-20 -mx-6 border-b border-border/40 bg-surface-dark/85 px-6 py-4 backdrop-blur dark:border-slate-700/40 md:-mx-10 md:px-10">
+            <div class="mx-auto max-w-3xl">
+              <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 dark:text-accent/80">
+                {entry.data.category}
+              </p>
+              <h2 class="mt-1 text-2xl font-bold text-primary dark:text-accent md:text-3xl">
+                {entry.data.title}
+              </h2>
+              <p class="mt-1 text-sm leading-tight text-text-muted dark:text-slate-400">
+                {entry.data.dateRange}
+                <span class="mx-2 text-slate-600">·</span>
+                {entry.data.yearRange}
+                <span class="mx-2 text-slate-600">·</span>
+                <span class="font-medium text-primary/80 dark:text-accent/80">{entry.data.place}</span>
+              </p>
+            </div>
+          </header>
+          <div class="journey-content mx-auto max-w-3xl px-1 py-8 md:px-2">
+            <Content />
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <aside class="hidden lg:block">
+      <nav class="sticky top-32 max-h-[calc(100vh-9rem)] overflow-y-auto pr-2" aria-label="Section navigator">
+        <p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-text-muted dark:text-slate-500">
+          On this page
+        </p>
+        <ol class="space-y-1 border-l border-border/50 dark:border-slate-700/60">
+          {sorted.map((s) => (
+            <li>
+              <a
+                href={`#section-${s.id}`}
+                data-toc-id={s.id}
+                class="toc-link -ml-px block border-l-2 border-transparent py-1.5 pl-3 pr-2 text-sm text-text-muted transition-colors hover:border-accent hover:text-accent dark:text-slate-400"
+              >
+                {s.data.title}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </aside>
+  </div>
 
   <ChatWidget slot="chat-widget" />
 </BaseLayout>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('.toc-link');
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('article[id^="section-"]'));
+  if (links.length && sections.length) {
+    const setActive = (id: string) => {
+      links.forEach((l) => {
+        const isActive = l.dataset.tocId === id;
+        l.classList.toggle('border-accent', isActive);
+        l.classList.toggle('text-accent', isActive);
+        l.classList.toggle('font-medium', isActive);
+      });
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) {
+          const id = visible.target.id.replace(/^section-/, '');
+          setActive(id);
+        }
+      },
+      { rootMargin: '-30% 0px -60% 0px', threshold: [0, 0.25, 0.5, 1] },
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+</script>
 
 <style is:global>
   .journey-content { color: rgb(226 232 240); line-height: 1.7; }
