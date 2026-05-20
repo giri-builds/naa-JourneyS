@@ -104,6 +104,34 @@ export async function loadContextFile(filename: string): Promise<string> {
 }
 
 /**
+ * Parse a unified diff and return only the NEW-side text — every `+`
+ * line and every context (` `) line, with the prefix stripped. Removed
+ * (`-`) lines and diff metadata are excluded.
+ *
+ * Use this (NOT the raw diff) when verifying that a finding's quoted
+ * snippet exists in the post-change code. Quoting a removed line and
+ * claiming it as current state is the most common LLM diff-reading
+ * mistake; this function makes it impossible to ground that quote.
+ */
+export function buildNewSideText(diff: string): string {
+  const parts: string[] = [];
+  for (const line of diff.split("\n")) {
+    if (
+      line.startsWith("+++") ||
+      line.startsWith("---") ||
+      line.startsWith("@@") ||
+      line.startsWith("diff --git") ||
+      line.startsWith("index ") ||
+      line.startsWith("\\")
+    ) continue;
+    if (line.startsWith("+")) parts.push(line.slice(1));
+    else if (line.startsWith(" ")) parts.push(line.slice(1));
+    // `-` lines (removed) are intentionally skipped.
+  }
+  return parts.join("\n");
+}
+
+/**
  * Parse a unified diff and return the set of (file, NEW-side line) pairs
  * that GitHub will accept as inline-comment targets — added lines (+) and
  * unchanged context lines (space). Used to filter hallucinated comment

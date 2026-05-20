@@ -12,6 +12,7 @@ import {
   loadDiff,
   loadContextFile,
   buildDiffLineSet,
+  buildNewSideText,
   MAX_PR_LINES,
 } from "./loader.ts";
 
@@ -64,18 +65,37 @@ function normalizeWhitespace(s: string): string {
 /**
  * Pull every backtick-quoted snippet ≥15 chars containing programming-ish
  * characters, then check that at least one is a (whitespace-normalised)
- * substring of the diff. If none match, the LLM fabricated the quote.
+ * substring of the NEW-side text. `newSideText` MUST be built via
+ * `buildNewSideText(diff)` — passing the raw diff would let the LLM
+ * "ground" a quote against a removed (`-`) line, which is the most common
+ * diff-direction failure mode.
  */
-function hasGroundedQuote(body: string, diff: string): boolean {
+function hasGroundedQuote(body: string, newSideText: string): boolean {
   const re = /`([^`\n]{15,})`/g;
-  const normalizedDiff = normalizeWhitespace(diff);
+  const normalized = normalizeWhitespace(newSideText);
   let m: RegExpExecArray | null;
   while ((m = re.exec(body)) !== null) {
     const snippet = m[1];
     if (!/[{};=()<>.\[\]]|=>/.test(snippet)) continue;
-    if (normalizedDiff.includes(normalizeWhitespace(snippet))) return true;
+    if (normalized.includes(normalizeWhitespace(snippet))) return true;
   }
   return false;
+}
+
+/**
+ * "Missing X" / "lacks X" / "only has Y" claims require explicit evidence
+ * of absence per the persona's Rule 2. Enforce it: if the body uses one
+ * of those trigger phrases, it must also cite a specific line number or
+ * say it read a specific line range. Otherwise the LLM is guessing.
+ */
+const MISSING_X_TRIGGERS =
+  /\b(?:missing|lacks?|only has|currently (?:has|lacks?)|does(?:n't| not) have|fails? to (?:include|set|define))\b/i;
+const LINE_CITATION =
+  /\b(?:line|lines)\s+\d+\b|\bL\d+\b|:\d+\b|\b\d+\s*[-–]\s*\d+\b/i;
+
+function hasUngroundedMissingClaim(body: string): boolean {
+  if (!MISSING_X_TRIGGERS.test(body)) return false;
+  return !LINE_CITATION.test(body);
 }
 
 /**
@@ -206,22 +226,29 @@ async function main(): Promise<void> {
     throw new Error(`Pass 3 returned unparseable JSON: ${(err as Error).message}`);
   }
 
-  // Filter inline comments: drop fabricated, speculative, line:1-5-without-context,
-  // and any line outside the diff line set.
+  // Filter inline comments: drop fabricated, speculative, ungrounded
+  // "missing X" claims, line:1-5-without-context, and any line outside
+  // the diff line set.
   const lineSet = buildDiffLineSet(diff);
+  const newSideText = buildNewSideText(diff);
   let droppedFabricated = 0;
   let droppedSpeculative = 0;
   let droppedSuspiciousLine = 0;
+  let droppedUngroundedMissing = 0;
   const orphaned: typeof lead.inline_comments = [];
 
   const validInline: ReviewComment[] = [];
   for (const c of lead.inline_comments || []) {
-    if (!hasGroundedQuote(c.body, diff)) {
+    if (!hasGroundedQuote(c.body, newSideText)) {
       droppedFabricated++;
       continue;
     }
     if (looksSpeculative(c.body)) {
       droppedSpeculative++;
+      continue;
+    }
+    if (hasUngroundedMissingClaim(c.body)) {
+      droppedUngroundedMissing++;
       continue;
     }
     if (hasSuspiciousLineNumber(c.line, c.body)) {
@@ -235,10 +262,11 @@ async function main(): Promise<void> {
     validInline.push({ path: c.file, line: c.line, body: c.body, side: "RIGHT" });
   }
 
-  const filterCount = droppedFabricated + droppedSpeculative + droppedSuspiciousLine;
+  const filterCount =
+    droppedFabricated + droppedSpeculative + droppedUngroundedMissing + droppedSuspiciousLine;
   const filterBanner =
     filterCount > 0
-      ? `🛡️ Filtered ${filterCount} unsubstantiated finding(s): ${droppedFabricated} fabricated quote(s), ${droppedSpeculative} speculative claim(s), ${droppedSuspiciousLine} suspicious line:1–5 reference(s).\n\n`
+      ? `🛡️ Filtered ${filterCount} unsubstantiated finding(s): ${droppedFabricated} fabricated quote(s), ${droppedSpeculative} speculative claim(s), ${droppedUngroundedMissing} ungrounded "missing X" claim(s), ${droppedSuspiciousLine} suspicious line:1–5 reference(s).\n\n`
       : "";
 
   const orphanedSection =

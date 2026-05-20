@@ -1,7 +1,7 @@
 /** Gemini REST API wrapper — zero deps, native fetch.
  *  Falls back through model chain on 429/5xx (quota / overload). */
 
-const DEFAULT_MODELS = ["gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite"];
+const DEFAULT_MODELS = ["gemini-2.5-pro", "gemini-2.5-flash"];
 const FALLBACK_STATUSES = new Set([429, 500, 502, 503, 504]);
 const REQUEST_TIMEOUT_MS = 120_000;
 

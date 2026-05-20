@@ -86,6 +86,12 @@ the finding.
 Every finding's `explanation` MUST include the exact line from the diff
 between backticks.
 
+**Quotes MUST come from added (`+`) or context (` `) lines.** Removed
+(`-`) lines describe code that NO LONGER EXISTS after this PR — quoting
+them as if they were current state is the single most common
+diff-reading mistake. If your finding's quote is from a `-` line,
+the issue you're flagging has already been fixed by this PR. Drop it.
+
 ❌ Bad: "The retriever loads embeddings on every request."
 ✅ Good: "Line 9–11 of `backend/rag/retriever.py` calls `load_chunks()` and `load_embeddings()` inside `retrieve_context`, so every request re-reads `embeddings.npy` from disk."
 
