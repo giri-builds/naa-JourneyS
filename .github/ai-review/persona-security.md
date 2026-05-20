@@ -74,6 +74,12 @@ not real review.
 Every finding's `explanation` MUST include the exact line of code from
 the diff that's the problem, copy-pasted between backticks.
 
+**Quotes MUST come from added (`+`) or context (` `) lines.** Removed
+(`-`) lines describe code that NO LONGER EXISTS after this PR — quoting
+them as if they were current state is the single most common
+diff-reading mistake. If your finding's quote is from a `-` line,
+the issue you're flagging has already been fixed by this PR. Drop it.
+
 ❌ Bad: "The /api/chat handler doesn't validate input length."
 ✅ Good: "Line 14 reads `question = body.get('question', '').strip()` — only checks emptiness, no length cap before passing to the embedder."
 

@@ -49,8 +49,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          # Default skips Pro (free quota often 0). Override via secret if you have Pro access.
-          GEMINI_MODELS: ${{ secrets.GEMINI_MODELS || 'gemini-2.5-flash,gemini-1.5-flash' }}
+          # Default skips Pro (free quota often 0) and skips flash-lite
+          # (produced demonstrably worse findings — hallucinated "missing X"
+          # claims, diff-direction confusion). 2.5-flash quality beats
+          # 2.5-flash-lite uptime for this use case.
+          GEMINI_MODELS: ${{ secrets.GEMINI_MODELS || 'gemini-2.5-flash' }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           PR_NUMBER: ${{ steps.pr.outputs.number }}
         run: npx -y tsx scripts/ai-review/index.ts
