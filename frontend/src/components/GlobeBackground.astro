@@ -10,6 +10,7 @@
 
   if (canvas) {
     let phi = 0;
+
     const sizePx = () => Math.max(window.innerWidth, window.innerHeight) * 1.4;
 
     const setSize = () => {
@@ -19,39 +20,42 @@
       canvas.style.width = `${s}px`;
       canvas.style.height = `${s}px`;
     };
-    setSize();
 
-    const globe = createGlobe(canvas, {
-      devicePixelRatio: 2,
-      width: canvas.width,
-      height: canvas.height,
-      phi: 0,
-      theta: 0.25,
-      dark: 1,
-      diffuse: 1.4,
-      mapSamples: 16000,
-      mapBrightness: 6.5,
-      baseColor: [0.18, 0.45, 0.6],
-      markerColor: [0.13, 0.83, 0.93],
-      glowColor: [0.18, 0.78, 1.1],
-      markers: [
-        { location: [14.4673, 78.8242], size: 0.06 },
-        { location: [17.385, 78.4867], size: 0.07 },
-        { location: [13.0827, 80.2707], size: 0.05 },
-      ],
-      onRender: (state) => {
-        state.phi = phi;
-        if (!reduceMotion) phi += 0.0025;
-      },
-    });
+    const buildGlobe = () =>
+      createGlobe(canvas, {
+        devicePixelRatio: 2,
+        width: canvas.width,
+        height: canvas.height,
+        phi: 0,
+        theta: 0.25,
+        dark: 1,
+        diffuse: 1.4,
+        mapSamples: 16000,
+        mapBrightness: 6.5,
+        baseColor: [0.18, 0.45, 0.6],
+        markerColor: [0.13, 0.83, 0.93],
+        glowColor: [0.18, 0.78, 1.1],
+        markers: [
+          { location: [14.4673, 78.8242], size: 0.06 },
+          { location: [17.385, 78.4867], size: 0.07 },
+          { location: [13.0827, 80.2707], size: 0.05 },
+        ],
+        onRender: (state) => {
+          state.phi = phi;
+          if (!reduceMotion) phi += 0.0025;
+        },
+      });
+
+    setSize();
+    let globe = buildGlobe();
 
     let resizeRaf = 0;
     window.addEventListener('resize', () => {
       cancelAnimationFrame(resizeRaf);
       resizeRaf = requestAnimationFrame(() => {
         setSize();
-        globe.toggle();
-        globe.toggle();
+        globe.destroy();
+        globe = buildGlobe();
       });
     });
   }
