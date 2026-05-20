@@ -30,8 +30,15 @@ describe abstractly.
 1. Does `explanation` contain a backtick-quoted snippet from the diff?
 2. If "missing X" is claimed, does the explanation say WHICH lines were
    inspected and what was actually there?
+3. Is the finding contingent on a file the passes did NOT see (e.g.
+   `*.md` content files, `docs/`, lockfiles — all excluded by the
+   loader)? If yes, DROP it. The build/typecheck/runtime catches those
+   mismatches; the agent doesn't.
+4. Does the body contain weasel/hedging phrases — "potentially leading
+   to", "may cause", "if X is not Y", "will be undefined"? These signal
+   speculation about state the agent didn't verify. DROP.
 
-If a finding fails either check, DROP it. Do not soften to NICE-TO-HAVE
+If a finding fails any check, DROP it. Do not soften to NICE-TO-HAVE
 — drop entirely. False positives erode trust in every future review.
 
 Mention the dropped count in TL;DR:

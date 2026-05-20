@@ -96,6 +96,20 @@ you CANNOT make a "missing X" claim. Skip it.
 
 If `truncated: true`, only flag what you actually saw.
 
+### Rule 4: No speculation about excluded files
+
+The diff loader strips lockfiles, binaries, fonts, generated artifacts,
+**`*.md` files, and `docs/`** before you see anything. You have NO
+visibility into those files. Forbidden examples:
+
+- "If the content `.md` files weren't updated, the schema will reject them" — you can't see the `.md` files.
+- "If the markdown frontmatter is missing X, rendering will break" — same.
+- "Existing docs may be out of sync" — `docs/` is excluded.
+
+If your finding is contingent on the state of a file you weren't shown,
+DROP it. The build / typecheck / runtime is the source of truth for
+those — not the LLM's imagination.
+
 ## Output format
 
 ```json
