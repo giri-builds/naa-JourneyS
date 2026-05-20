@@ -55,7 +55,7 @@ for (const s of inOrder) {
 
 const W = 1400;
 const H = 540;
-const padL = 80;
+const padL = 110;
 const padR = 60;
 const padTop = 70;
 const padBottom = 90;
@@ -166,6 +166,19 @@ const pathD = roadPath(pts);
         const above = i % 2 === 0;
         const labelPos = above ? 'bottom-[36px]' : 'top-[36px]';
         const popoverPos = above ? 'top-[36px]' : 'bottom-[36px]';
+        const LABEL_W = 160;
+        const isNearLeft = p.px - LABEL_W / 2 < padL;
+        const isNearRight = p.px + LABEL_W / 2 > padL + plotW;
+        const labelAlign = isNearLeft
+          ? 'left-0 translate-x-0 text-left'
+          : isNearRight
+          ? 'right-0 translate-x-0 text-right'
+          : 'left-1/2 -translate-x-1/2 text-center';
+        const popoverAlign = isNearLeft
+          ? 'left-0 translate-x-0'
+          : isNearRight
+          ? 'right-0 translate-x-0'
+          : 'left-1/2 -translate-x-1/2';
         return (
           <a
             href={`${base}#section-${p.id}`}
@@ -174,7 +187,7 @@ const pathD = roadPath(pts);
           >
             <span class="block h-4 w-4 rounded-full border-2 border-white bg-primary shadow-[0_0_18px_rgba(34,211,238,0.65)] transition-transform group-hover:scale-125 dark:border-slate-900 dark:bg-accent"></span>
 
-            <div class={`absolute left-1/2 w-40 -translate-x-1/2 text-center ${labelPos}`}>
+            <div class={`absolute w-40 ${labelAlign} ${labelPos}`}>
               <p class="line-clamp-2 text-sm font-semibold text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-accent">
                 {p.data.title}
               </p>
@@ -183,7 +196,7 @@ const pathD = roadPath(pts);
               <p class="text-[11px] leading-tight font-medium text-primary/80 dark:text-accent/80">{p.data.place}</p>
             </div>
 
-            <div class={`pointer-events-none absolute left-1/2 w-60 -translate-x-1/2 rounded-lg border border-border bg-white p-3 text-left text-xs leading-snug text-text-muted opacity-0 shadow-xl transition-opacity duration-150 group-hover:opacity-100 group-focus:opacity-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 ${popoverPos}`}>
+            <div class={`pointer-events-none absolute w-60 rounded-lg border border-border bg-white p-3 text-left text-xs leading-snug text-text-muted opacity-0 shadow-xl transition-opacity duration-150 group-hover:opacity-100 group-focus:opacity-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 ${popoverAlign} ${popoverPos}`}>
               <p class="mb-1 text-[10px] font-semibold uppercase tracking-wider text-primary dark:text-accent">
                 {p.data.category}
               </p>

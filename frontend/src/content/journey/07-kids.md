@@ -1,5 +1,5 @@
 ---
-title: "Kids"
+title: "👨‍👩‍👦 Kids"
 order: 7
 dateRange: "Age 30 - Present"
 yearRange: "2020 - Present"

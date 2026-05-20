@@ -1,5 +1,5 @@
 ---
-title: "Married Life"
+title: "💍 Married Life"
 order: 6
 dateRange: "Age 28 - Present"
 yearRange: "2018 - Present"

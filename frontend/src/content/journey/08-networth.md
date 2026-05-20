@@ -1,5 +1,5 @@
 ---
-title: "Net Worth & Financial Journey"
+title: "💰 Net Worth & Financial Journey"
 order: 8
 dateRange: "Age 24 - Present"
 yearRange: "2014 - Present"

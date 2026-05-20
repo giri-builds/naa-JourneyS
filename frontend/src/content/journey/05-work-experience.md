@@ -1,5 +1,5 @@
 ---
-title: "Work Experience"
+title: "💼 Work Experience"
 order: 5
 dateRange: "Age 24 - Present"
 yearRange: "2014 - Present"

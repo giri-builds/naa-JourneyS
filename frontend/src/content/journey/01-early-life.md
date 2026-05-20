@@ -1,5 +1,5 @@
 ---
-title: "Early Life"
+title: "👶 Early Life"
 order: 1
 dateRange: "Birth - Age 5"
 yearRange: "1989 - 1994"
