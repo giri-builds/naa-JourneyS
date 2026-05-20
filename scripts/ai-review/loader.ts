@@ -23,6 +23,7 @@ const EXCLUDE_PATTERNS: RegExp[] = [
   /\.(mp3|mp4|webm|ogg|wav|mov)$/i,
   /\.(zip|tar|gz|bz2|7z|rar)$/i,
   /\.npy$/, /\.bin$/, /\.parquet$/,
+  /(^|\/)backend\/data\//,
   /(^|\/)node_modules\//,
   /(^|\/)\.venv\//, /(^|\/)venv\//, /(^|\/)__pycache__\//,
   /(^|\/)dist\//, /(^|\/)build\//, /(^|\/)\.next\//, /(^|\/)\.astro\//,
