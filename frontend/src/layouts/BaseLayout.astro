@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SocialLinks from '../components/SocialLinks.astro';
 import GlobeBackground from '../components/GlobeBackground.astro';
+import ActivityCard from '../components/ActivityCard.astro';
 import { interests } from '../data/profile';
 
 interface Props {
@@ -48,6 +49,9 @@ const marqueeItems = [...interests, ...interests];
 
     <main class="relative z-10 mx-auto max-w-[1500px] px-6 py-8 md:px-10">
       <SocialLinks />
+      <div class="mb-6 flex justify-center md:mb-8">
+        <ActivityCard />
+      </div>
       <slot />
     </main>
 
@@ -69,7 +73,7 @@ const marqueeItems = [...interests, ...interests];
     gap: 2.25rem;
     white-space: nowrap;
     will-change: transform;
-    animation: marquee-scroll 180s linear infinite;
+    animation: marquee-scroll 60s linear infinite;
   }
   .marquee-item {
     font-size: 0.78rem;

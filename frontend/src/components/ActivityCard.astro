@@ -1,0 +1,112 @@
+---
+import { profile, schedule } from '../data/profile';
+---
+<div class="activity-card" role="status" aria-live="polite">
+  <p class="card-name">{profile.name}</p>
+  <p class="card-place">
+    <span>📍 {profile.place}</span>
+    <span class="card-dot">·</span>
+    <span id="card-clock">--:-- IST</span>
+  </p>
+  <p class="card-status">
+    <span class="card-pulse" aria-hidden="true"></span>
+    <span class="card-status-prefix">Current Status:</span>
+    <span class="card-status-value" id="card-activity">Loading…</span>
+  </p>
+</div>
+
+<script define:vars={{ schedule, timezone: profile.timezone }}>
+  function toMinutes(hhmm) {
+    const [h, m] = hhmm.split(':').map(Number);
+    return h * 60 + m;
+  }
+  function inSlot(now, from, to) {
+    const f = toMinutes(from);
+    const t = toMinutes(to);
+    if (f === t) return false;
+    if (f < t) return now >= f && now < t;
+    return now >= f || now < t;
+  }
+  function currentActivity(date) {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: timezone,
+    }).formatToParts(date);
+    const hh = parts.find((p) => p.type === 'hour').value;
+    const mm = parts.find((p) => p.type === 'minute').value;
+    const nowMin = toMinutes(`${hh}:${mm}`);
+    const slot = schedule.find((s) => inSlot(nowMin, s.from, s.to));
+    return { label: slot ? slot.label : '✨ Free time', time: `${hh}:${mm}` };
+  }
+
+  const clockEl = document.getElementById('card-clock');
+  const actEl = document.getElementById('card-activity');
+  function tick() {
+    const { label, time } = currentActivity(new Date());
+    if (clockEl) clockEl.textContent = `${time} IST`;
+    if (actEl) actEl.textContent = label;
+  }
+  tick();
+  setInterval(tick, 30_000);
+</script>
+
+<style>
+  .activity-card {
+    width: min(92%, 360px);
+    margin: 0 auto;
+    padding: 0.7rem 1rem;
+    border-radius: 0.85rem;
+    background: rgba(2, 6, 23, 0.55);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(34, 211, 238, 0.08);
+  }
+  .card-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f1f5f9;
+    letter-spacing: 0.01em;
+  }
+  .card-place {
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    display: flex;
+    justify-content: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+  }
+  .card-dot { color: #475569; }
+  .card-status {
+    margin-top: 0.45rem;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .card-status-prefix {
+    color: #94a3b8;
+    font-weight: 500;
+  }
+  .card-status-value {
+    color: #22d3ee;
+    font-weight: 600;
+  }
+  .card-pulse {
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: #22d3ee;
+    box-shadow: 0 0 8px rgba(34, 211, 238, 0.8);
+    animation: card-pulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes card-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.45; transform: scale(0.8); }
+  }
+</style>

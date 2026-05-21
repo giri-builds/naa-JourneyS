@@ -1,93 +1,45 @@
 ---
-import { profile, schedule } from '../data/profile';
 ---
-<div class="globe-stage">
-  <canvas id="cobe-globe" class="globe-canvas" aria-hidden="true"></canvas>
-  <div class="globe-overlay" role="status" aria-live="polite">
-    <p class="overlay-name">{profile.name}</p>
-    <p class="overlay-place">
-      <span>📍 {profile.place}</span>
-      <span class="overlay-dot">·</span>
-      <span id="overlay-clock">--:--</span>
-    </p>
-    <p class="overlay-status">
-      <span class="overlay-pulse" aria-hidden="true"></span>
-      <span id="overlay-activity">Loading…</span>
-    </p>
-  </div>
+<div class="globe-stage" aria-hidden="true">
+  <canvas id="cobe-globe" class="globe-canvas"></canvas>
 </div>
 
-<script define:vars={{ schedule, timezone: profile.timezone }}>
-  const canvas = document.getElementById('cobe-globe');
+<script>
+  import createGlobe from 'cobe';
+
+  const canvas = document.getElementById('cobe-globe') as HTMLCanvasElement | null;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (canvas) {
-    import('cobe').then(({ default: createGlobe }) => {
-      let phi = 0;
-      const size = 760;
-      canvas.width = size;
-      canvas.height = size;
+    let phi = 0;
+    const size = 760;
+    canvas.width = size;
+    canvas.height = size;
 
-      createGlobe(canvas, {
-        devicePixelRatio: 2,
-        width: size,
-        height: size,
-        phi: 0,
-        theta: 0.25,
-        dark: 1,
-        diffuse: 1.4,
-        mapSamples: 16000,
-        mapBrightness: 6.5,
-        baseColor: [0.18, 0.45, 0.6],
-        markerColor: [0.13, 0.83, 0.93],
-        glowColor: [0.18, 0.78, 1.1],
-        markers: [
-          { location: [14.4673, 78.8242], size: 0.06 },
-          { location: [17.385, 78.4867], size: 0.07 },
-          { location: [13.0827, 80.2707], size: 0.05 },
-        ],
-        onRender: (state) => {
-          state.phi = phi;
-          if (!reduceMotion) phi += 0.004;
-        },
-      });
+    createGlobe(canvas, {
+      devicePixelRatio: 2,
+      width: size,
+      height: size,
+      phi: 0,
+      theta: 0.25,
+      dark: 1,
+      diffuse: 1.4,
+      mapSamples: 16000,
+      mapBrightness: 6.5,
+      baseColor: [0.18, 0.45, 0.6],
+      markerColor: [0.13, 0.83, 0.93],
+      glowColor: [0.18, 0.78, 1.1],
+      markers: [
+        { location: [14.4673, 78.8242], size: 0.06 },
+        { location: [17.385, 78.4867], size: 0.07 },
+        { location: [13.0827, 80.2707], size: 0.05 },
+      ],
+      onRender: (state) => {
+        state.phi = phi;
+        if (!reduceMotion) phi += 0.004;
+      },
     });
   }
-
-  function toMinutes(hhmm) {
-    const [h, m] = hhmm.split(':').map(Number);
-    return h * 60 + m;
-  }
-  function inSlot(now, from, to) {
-    const f = toMinutes(from);
-    const t = toMinutes(to);
-    if (f === t) return false;
-    if (f < t) return now >= f && now < t;
-    return now >= f || now < t;
-  }
-  function currentActivity(date) {
-    const parts = new Intl.DateTimeFormat('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-      timeZone: timezone,
-    }).formatToParts(date);
-    const hh = parts.find((p) => p.type === 'hour').value;
-    const mm = parts.find((p) => p.type === 'minute').value;
-    const nowMin = toMinutes(`${hh}:${mm}`);
-    const slot = schedule.find((s) => inSlot(nowMin, s.from, s.to));
-    return { label: slot ? slot.label : '✨ Free time', time: `${hh}:${mm}` };
-  }
-
-  const clockEl = document.getElementById('overlay-clock');
-  const actEl = document.getElementById('overlay-activity');
-  function tick() {
-    const { label, time } = currentActivity(new Date());
-    if (clockEl) clockEl.textContent = `${time} IST`;
-    if (actEl) actEl.textContent = label;
-  }
-  tick();
-  setInterval(tick, 30_000);
 </script>
 
 <style>
@@ -115,59 +67,5 @@ import { profile, schedule } from '../data/profile';
     display: block;
     contain: layout paint size;
     cursor: grab;
-  }
-
-  .globe-overlay {
-    position: absolute;
-    left: 50%;
-    bottom: 8%;
-    transform: translateX(-50%);
-    width: min(92%, 320px);
-    padding: 0.75rem 1rem;
-    border-radius: 0.75rem;
-    background: rgba(2, 6, 23, 0.55);
-    border: 1px solid rgba(34, 211, 238, 0.22);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    text-align: center;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(34, 211, 238, 0.08);
-    pointer-events: none;
-  }
-
-  .overlay-name {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #f1f5f9;
-    letter-spacing: 0.01em;
-  }
-  .overlay-place {
-    margin-top: 0.15rem;
-    font-size: 0.72rem;
-    color: #94a3b8;
-    display: flex;
-    justify-content: center;
-    gap: 0.4rem;
-  }
-  .overlay-dot { color: #475569; }
-  .overlay-status {
-    margin-top: 0.4rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: #22d3ee;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-  }
-  .overlay-pulse {
-    width: 7px;
-    height: 7px;
-    border-radius: 999px;
-    background: #22d3ee;
-    box-shadow: 0 0 8px rgba(34, 211, 238, 0.8);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.45; transform: scale(0.8); }
   }
 </style>
