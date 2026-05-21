@@ -5,6 +5,7 @@ interface Section {
   id: string;
   data: {
     title: string;
+    subtitle?: string;
     order: number;
     dateRange: string;
     yearRange: string;
@@ -53,18 +54,18 @@ for (const s of inOrder) {
   }
 }
 
-const W = 1400;
-const H = 640;
+const W = 1800;
+const H = 800;
 const padL = 110;
 const padR = 60;
-const padTop = 110;
-const padBottom = 130;
+const padTop = 200;
+const padBottom = 200;
 const plotW = W - padL - padR;
 const plotH = H - padTop - padBottom;
 
 const minYear = BIRTH_YEAR;
 const placedMaxYear = placed.reduce((m, p) => Math.max(m, p.year), CURRENT_YEAR);
-const maxYear = Math.max(2026, Math.ceil(placedMaxYear / 5) * 5);
+const maxYear = Math.max(CURRENT_YEAR + 2, Math.ceil(placedMaxYear / 5) * 5);
 
 const minAge = 0;
 const placedMaxAge = placed.reduce((m, p) => Math.max(m, p.age), 0);
@@ -93,7 +94,8 @@ function roadPath(items: Pt[]): string {
     const len = Math.hypot(dx, dy) || 1;
     const nx = -dy / len;
     const ny = dx / len;
-    const bend = (i % 2 === 0 ? 1 : -1) * Math.min(45, len * 0.2);
+    // Don't bend short segments — clusters were producing loops in the road.
+    const bend = len < 90 ? 0 : (i % 2 === 0 ? 1 : -1) * Math.min(35, len * 0.15);
     const c1x = a.px + dx * 0.33 + nx * bend;
     const c1y = a.py + dy * 0.33 + ny * bend;
     const c2x = a.px + dx * 0.67 + nx * bend;
@@ -163,10 +165,20 @@ const pathD = roadPath(pts);
       </svg>
 
       {pts.map((p, i) => {
-        const above = i % 2 === 0;
-        const labelPos = above ? 'bottom-[64px]' : 'top-[64px]';
-        const popoverPos = above ? 'top-[40px]' : 'bottom-[40px]';
-        const LABEL_W = 160;
+        // 4-lane staggering: alternate above/below AND alternate near/far.
+        // Pattern: above-far, below-near, above-near, below-far, repeat.
+        // Adjacent dots always land on opposite sides (no horizontal collide),
+        // and same-side dots (i, i+2) land at different distances (no stack).
+        const lane = i % 4;
+        // Static class strings so Tailwind JIT can pick them up.
+        const labelPos =
+          lane === 0 ? 'bottom-[130px]'
+          : lane === 1 ? 'top-[64px]'
+          : lane === 2 ? 'bottom-[64px]'
+          : 'top-[130px]';
+        const popoverPos =
+          lane === 0 || lane === 2 ? 'top-[40px]' : 'bottom-[40px]';
+        const LABEL_W = 144;
         const isNearLeft = p.px - LABEL_W / 2 < padL;
         const isNearRight = p.px + LABEL_W / 2 > padL + plotW;
         const labelAlign = isNearLeft
@@ -187,11 +199,16 @@ const pathD = roadPath(pts);
           >
             <span class="block h-4 w-4 rounded-full border-2 border-white bg-primary shadow-[0_0_18px_rgba(34,211,238,0.65)] transition-transform group-hover:scale-125 dark:border-slate-900 dark:bg-accent"></span>
 
-            <div class={`absolute w-40 ${labelAlign} ${labelPos}`}>
-              <p class="line-clamp-2 text-sm font-semibold text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-accent">
+            <div class={`absolute w-36 ${labelAlign} ${labelPos}`}>
+              <p class="text-sm font-semibold leading-tight text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-accent">
                 {p.data.title}
               </p>
-              <p class="text-[11px] leading-tight text-text-muted dark:text-slate-400">{p.data.yearRange}</p>
+              {p.data.subtitle && (
+                <p class="text-[11px] italic leading-tight text-text-muted dark:text-slate-400">
+                  ({p.data.subtitle})
+                </p>
+              )}
+              <p class="mt-0.5 text-[11px] leading-tight text-text-muted dark:text-slate-400">{p.data.yearRange}</p>
               <p class="text-[11px] leading-tight font-medium text-primary/80 dark:text-accent/80">{p.data.place}</p>
             </div>
 

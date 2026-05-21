@@ -1,5 +1,5 @@
 ---
-title: "🏫 Village Govt School"
+title: "🏫 Govt School"
 order: 2.1
 dateRange: "Age 6 - Age 9"
 yearRange: "1995 - 1998"
