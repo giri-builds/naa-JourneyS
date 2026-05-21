@@ -1,5 +1,6 @@
 ---
-title: "🏆 SPL — School Pupil Leader"
+title: "🏆 SPL"
+subtitle: "School Pupil Leader"
 order: 2.3
 dateRange: "Age 15 - Age 16"
 yearRange: "2004 - 2005"

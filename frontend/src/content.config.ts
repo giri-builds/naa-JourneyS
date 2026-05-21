@@ -5,6 +5,7 @@ const journey = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/journey' }),
   schema: z.object({
     title: z.string(),
+    subtitle: z.string().optional(),
     order: z.number(),
     dateRange: z.string(),
     yearRange: z.string(),
