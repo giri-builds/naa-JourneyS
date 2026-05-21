@@ -1,5 +1,5 @@
 export const profile = {
-  name: 'Dastagiri Vadapalli',
+  name: "g!r!'$",
   place: 'Hyderabad, India',
   timezone: 'Asia/Kolkata',
 };

@@ -54,11 +54,11 @@ for (const s of inOrder) {
 }
 
 const W = 1400;
-const H = 540;
+const H = 640;
 const padL = 110;
 const padR = 60;
-const padTop = 70;
-const padBottom = 90;
+const padTop = 110;
+const padBottom = 130;
 const plotW = W - padL - padR;
 const plotH = H - padTop - padBottom;
 
@@ -164,8 +164,8 @@ const pathD = roadPath(pts);
 
       {pts.map((p, i) => {
         const above = i % 2 === 0;
-        const labelPos = above ? 'bottom-[36px]' : 'top-[36px]';
-        const popoverPos = above ? 'top-[36px]' : 'bottom-[36px]';
+        const labelPos = above ? 'bottom-[64px]' : 'top-[64px]';
+        const popoverPos = above ? 'top-[40px]' : 'bottom-[40px]';
         const LABEL_W = 160;
         const isNearLeft = p.px - LABEL_W / 2 < padL;
         const isNearRight = p.px + LABEL_W / 2 > padL + plotW;
