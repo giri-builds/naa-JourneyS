@@ -18,11 +18,29 @@
     }
   },
   {
-    "text": "## School Days\n\nI joined in the Pvt school Sri Vijayavani Vidyanikethan in the 4th standard in the year 1998 and completed my S.S.C in the same school in 2005 and secured 510/600 marks.\n\nI made good friends in the school, I was elected as a SPL (School Peaople Leader) during 9th standard and did justice to my role.\n\nPlace: Yerraguntla\nDistrict: Kadapa (Rayalaseema)",
+    "text": "## My First Classroom\n\nI started my education at the Government primary school in Chennavaram in 1995. Studied here through 3rd standard.\n\n> _Add memories: classmates, teachers, first lessons, the village school routine, walking to school, etc._",
     "metadata": {
-      "source": "02-schooling.md",
-      "title": "\ud83c\udf92 Schooling",
-      "dateRange": "Age 6 - Age 16",
+      "source": "02a-govt-school.md",
+      "title": "\ud83c\udfeb Village Govt School",
+      "dateRange": "Age 6 - Age 9",
+      "category": "education"
+    }
+  },
+  {
+    "text": "## Sri Vijayavani Vidyanikethan\n\nI joined Sri Vijayavani Vidyanikethan in 4th standard in 1998 after my parents moved to Yerraguntla so my sister and I could get a better education. Completed my S.S.C from the same school in 2005, securing **510/600 marks**.\n\n> _Add memories: friends, favourite subjects, teachers who shaped you, sports/cultural events, daily routine, exams._",
+    "metadata": {
+      "source": "02b-vijayavani-school.md",
+      "title": "\ud83d\udcd6 Vijayavani Vidyanikethan",
+      "dateRange": "Age 9 - Age 16",
+      "category": "education"
+    }
+  },
+  {
+    "text": "## A Badge of Responsibility\n\nIn 9th standard I was elected as the **School Pupil Leader (SPL)** at Sri Vijayavani Vidyanikethan. Did my best to live up to the role.\n\n> _Add memories: how the election went, responsibilities you took on, events you led, lessons learned about leadership._",
+    "metadata": {
+      "source": "02c-spl.md",
+      "title": "\ud83c\udfc6 SPL \u2014 School Pupil Leader",
+      "dateRange": "Age 15 - Age 16",
       "category": "education"
     }
   },
@@ -45,47 +63,110 @@
     }
   },
   {
-    "text": "## Career Path\n\nData Analyst\nICICI Bank Limited | May 2014 - July 2016\n\u2022 Developed optimized SQL queries for data extraction and collaborated with stakeholders to gather data requirements.\n\u2022 Delivered reports and dashboards using TIBCO Spotfire to support business analysis, campaign execution, and performance monitoring.",
+    "text": "## The In-Between Years\n\nAfter completing my B.Tech in 2011, I returned to Yerraguntla. The next two years were a transition phase \u2014 figuring out the next step.\n\n> _Add memories: what you did during this time, struggles, what you learned, who you spent time with, the inner shifts that shaped what came next._",
     "metadata": {
-      "source": "05-work-experience.md",
-      "title": "\ud83d\udcbc Work Experience",
-      "dateRange": "Age 24 - Present",
+      "source": "04a-the-gap.md",
+      "title": "\u23f3 The Gap",
+      "dateRange": "Age 22 - Age 24",
+      "category": "personal"
+    }
+  },
+  {
+    "text": "## Bangalore \u2014 A New City\n\nMoved to Bangalore in 2013 to pursue a Post Graduate Diploma. The course gave me direction and the city gave me independence.\n\n> _Add details: name of the institute, the course content, classmates, life in Bangalore, the moment things \"clicked\" career-wise._",
+    "metadata": {
+      "source": "04b-pg-diploma.md",
+      "title": "\ud83d\udcdc Post Graduate Diploma",
+      "dateRange": "Age 24 - Age 25",
+      "category": "education"
+    }
+  },
+  {
+    "text": "## Data Analyst\n\n**ICICI Bank Limited | May 2014 \u2013 July 2016**\n\n- Developed optimized SQL queries for data extraction and collaborated with stakeholders to gather data requirements.\n- Delivered reports and dashboards using TIBCO Spotfire to support business analysis, campaign execution, and performance monitoring.\n\n> _Add memories: how you landed the role, your team, what you learned, the moments that defined this stint._",
+    "metadata": {
+      "source": "05a-icici.md",
+      "title": "\ud83d\udcbc ICICI Bank",
+      "dateRange": "Age 24 - Age 26",
       "category": "career"
     }
   },
   {
-    "text": "Data Engineer\nValue Labs | Client: Nielsen - Media | December 2016 - September 2022\n\u2022 Led reporting team delivering near real-time user and usage data insights using Big Data technologies (Hadoop, Spark, Hive).\n\u2022 Migrated on-premises Big Data infrastructure to AWS (EMR, EC2, RDS, Athena, Lambda) for scalable data processing and analytics.\n\u2022 Built Hive/Spark jobs within Oozie workflows, optimized SQL performance, and enabled ad-hoc querying through Athena and Lambda.",
+    "text": "## A Pause Worth Taking\n\nBetween August and November 2016, I took a deliberate break from work in Bangalore. Four months to step back, reflect, and choose what came next.\n\n> _Add memories: what triggered the break, what you did with the time (travel, learning, family, rest), what you took back into work afterwards._",
     "metadata": {
-      "source": "05-work-experience.md",
-      "title": "\ud83d\udcbc Work Experience",
-      "dateRange": "Age 24 - Present",
+      "source": "05b-the-break.md",
+      "title": "\u2615 The Break",
+      "dateRange": "Age 26 - Age 27",
+      "category": "personal"
+    }
+  },
+  {
+    "text": "## Data Engineer\n\n**Value Labs | Client: Nielsen \u2013 Media | Dec 2016 \u2013 Sep 2022**\n\n- Led reporting team delivering near real-time user and usage data insights using Big Data technologies (Hadoop, Spark, Hive).\n- Migrated on-premises Big Data infrastructure to AWS (EMR, EC2, RDS, Athena, Lambda) for scalable data processing and analytics.\n- Built Hive/Spark jobs within Oozie workflows, optimized SQL performance, and enabled ad-hoc querying through Athena and Lambda.",
+    "metadata": {
+      "source": "05c-value-labs.md",
+      "title": "\ud83d\udcbc Value Labs",
+      "dateRange": "Age 27 - Age 34",
       "category": "career"
     }
   },
   {
-    "text": "Senior Data Engineer\nValue Labs | Client: eyos.one - Retail | October 2022 - September 2023\n\u2022 Developed real-time and batch ETL pipelines to load data into MySQL and Snowflake, including Spark Streaming archival from S3 file sources.\n\u2022 Built scalable, config-driven solutions to process sales data from various file formats and schemas.\n\u2022 Created Python automation jobs for data aggregation and transformation; developed AWS Lambda functions for serverless task automation.",
+    "text": "## Senior Data Engineer\n\n**Value Labs | Client: eyos.one \u2013 Retail | Oct 2022 \u2013 Sep 2023**\n\n- Developed real-time and batch ETL pipelines to load data into MySQL and Snowflake, including Spark Streaming archival from S3 file sources.\n- Built scalable, config-driven solutions to process sales data from various file formats and schemas.\n- Created Python automation jobs for data aggregation and transformation; developed AWS Lambda functions for serverless task automation.",
     "metadata": {
-      "source": "05-work-experience.md",
-      "title": "\ud83d\udcbc Work Experience",
-      "dateRange": "Age 24 - Present",
+      "source": "05c-value-labs.md",
+      "title": "\ud83d\udcbc Value Labs",
+      "dateRange": "Age 27 - Age 34",
       "category": "career"
     }
   },
   {
-    "text": "Senior Data Engineer\nValue Labs | Client: Nielsen - Media | October 2023 - July 2024\n\u2022 Designed and developed scalable data ingestion pipelines using PySpark and SQL within Dockerized Python images, integrated with Airflow for S3/Data Lake extraction.\n\u2022 Built complex PySpark workflows for data transformation and cleaning supporting analytics and ML use cases, executed on AWS EMR and Kubernetes (EKS).\n\u2022 Developed and maintained data warehouse solutions using HiveQL and Spark SQL with monitoring and alerting for job reliability and data quality.\n\u2022 Collaborated with data scientists and analysts to deliver clean datasets; built dashboards in Superset and Spotfire for daily operational trend visualization.",
+    "text": "## Senior Data Engineer\n\n**Value Labs | Client: Nielsen \u2013 Media | Oct 2023 \u2013 Jul 2024**",
     "metadata": {
-      "source": "05-work-experience.md",
-      "title": "\ud83d\udcbc Work Experience",
-      "dateRange": "Age 24 - Present",
+      "source": "05c-value-labs.md",
+      "title": "\ud83d\udcbc Value Labs",
+      "dateRange": "Age 27 - Age 34",
       "category": "career"
     }
   },
   {
-    "text": "Lead Engineer - Software Development (AI & Platform Engineering)\nQuest Global | Client: Apple - Ad Platforms | August 2024 - Present\n\u2022 Developed Ads Airflow MCP Server providing Claude AI direct read-only access to Ads Airflow environments, enabling AI-assisted infrastructure monitoring and debugging.\n\u2022 Built AI-assisted code migration tool using RAG + multi-phase agentic pipeline (Claude Opus, Qdrant, LibCST) to automate Airflow 2.9.2 to 3.2.0 DAG migration across 100+ production DAGs, reducing manual effort by 80%.\n\u2022 Developed an On-call (L1) Support AI Skill integrating multiple MCPs (PagerDuty, Slack, Splunk, Grafana) for automated alert debugging and resolution.\n\u2022 Fine-tuned a RAG chatbot to handle consumer queries on Ads Airflow Slack support channel, reducing response time by 60% using curated documentation as knowledge base.\n\u2022 Built LLM-maintained knowledge wiki using Claude Code with schema-driven extraction pipeline, generating browsable Wikipedia-style static HTML from raw sources (PDFs, markdown, HTML).\n\u2022 Deployed and maintained end-to-end Apache Airflow data pipelines on Kubernetes (AWS EKS), achieving 99.99% uptime through optimized scheduling, Helm upgrades, executor tuning, and autoscaling.\n\u2022 Containerized Airflow components with Docker and built CI/CD pipelines for reproducible deployments across dev/stg/prod environments.\n\u2022 Implemented monitoring, alerting, and logging with Datadog/Grafana and Splunk; proactively troubleshot DAG failures, Kubernetes bottlenecks, and infrastructure incidents.\n\u2022 Provided 24/7 production support including DAG deployment issues, failure investigations, and workflow debugging for onboarded teams.",
+    "text": "- Designed and developed scalable data ingestion pipelines using PySpark and SQL within Dockerized Python images, integrated with Airflow for S3/Data Lake extraction.\n- Built complex PySpark workflows for data transformation and cleaning supporting analytics and ML use cases, executed on AWS EMR and Kubernetes (EKS).\n- Developed and maintained data warehouse solutions using HiveQL and Spark SQL with monitoring and alerting for job reliability and data quality.\n- Collaborated with data scientists and analysts to deliver clean datasets; built dashboards in Superset and Spotfire for daily operational trend visualization.",
     "metadata": {
-      "source": "05-work-experience.md",
-      "title": "\ud83d\udcbc Work Experience",
-      "dateRange": "Age 24 - Present",
+      "source": "05c-value-labs.md",
+      "title": "\ud83d\udcbc Value Labs",
+      "dateRange": "Age 27 - Age 34",
+      "category": "career"
+    }
+  },
+  {
+    "text": "> _Add reflections: clients you grew with, mentors, hardest project, what made you decide to move on._",
+    "metadata": {
+      "source": "05c-value-labs.md",
+      "title": "\ud83d\udcbc Value Labs",
+      "dateRange": "Age 27 - Age 34",
+      "category": "career"
+    }
+  },
+  {
+    "text": "## Lead Engineer \u2014 Software Development (AI & Platform Engineering)\n\n**Quest Global | Client: Apple \u2013 Ad Platforms | Aug 2024 \u2013 Present**",
+    "metadata": {
+      "source": "05d-quest-global.md",
+      "title": "\ud83d\udcbc Quest Global \u2014 Apple Ad Platforms",
+      "dateRange": "Age 34 - Present",
+      "category": "career"
+    }
+  },
+  {
+    "text": "- Developed Ads Airflow MCP Server providing Claude AI direct read-only access to Ads Airflow environments, enabling AI-assisted infrastructure monitoring and debugging.\n- Built AI-assisted code migration tool using RAG + multi-phase agentic pipeline (Claude Opus, Qdrant, LibCST) to automate Airflow 2.9.2 to 3.2.0 DAG migration across 100+ production DAGs, reducing manual effort by 80%.\n- Developed an On-call (L1) Support AI Skill integrating multiple MCPs (PagerDuty, Slack, Splunk, Grafana) for automated alert debugging and resolution.\n- Fine-tuned a RAG chatbot to handle consumer queries on Ads Airflow Slack support channel, reducing response time by 60% using curated documentation as knowledge base.\n- Built LLM-maintained knowledge wiki using Claude Code with schema-driven extraction pipeline, generating browsable Wikipedia-style static HTML from raw sources (PDFs, markdown, HTML).\n- Deployed and maintained end-to-end Apache Airflow data pipelines on Kubernetes (AWS EKS), achieving 99.99% uptime through optimized scheduling, Helm upgrades, executor tuning, and autoscaling.\n- Containerized Airflow components with Docker and built CI/CD pipelines for reproducible deployments across dev/stg/prod environments.\n- Implemented monitoring, alerting, and logging with Datadog/Grafana and Splunk; proactively troubleshot DAG failures, Kubernetes bottlenecks, and infrastructure incidents.\n- Provided 24/7 production support including DAG deployment issues, failure investigations, and workflow debugging for onboarded teams.",
+    "metadata": {
+      "source": "05d-quest-global.md",
+      "title": "\ud83d\udcbc Quest Global \u2014 Apple Ad Platforms",
+      "dateRange": "Age 34 - Present",
+      "category": "career"
+    }
+  },
+  {
+    "text": "> _Add reflections: highlights of the AI/Platform work, what you've shipped, where you want this chapter to go._",
+    "metadata": {
+      "source": "05d-quest-global.md",
+      "title": "\ud83d\udcbc Quest Global \u2014 Apple Ad Platforms",
+      "dateRange": "Age 34 - Present",
       "category": "career"
     }
   },
