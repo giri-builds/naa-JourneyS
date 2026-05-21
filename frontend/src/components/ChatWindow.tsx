@@ -51,15 +51,20 @@ export default function ChatWindow() {
 
   if (!isOpen) {
     return (
-      <button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-sky-500 text-slate-900 shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-transform hover:scale-110"
-        aria-label="Open chat"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-        </svg>
-      </button>
+      <div className="chat-float fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+        <span className="rounded-full border border-cyan-400/40 bg-slate-900/80 px-3 py-1 text-xs font-semibold text-cyan-300 shadow-lg backdrop-blur">
+          Ask g!r!'$
+        </span>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-sky-500 text-slate-900 shadow-[0_0_30px_rgba(34,211,238,0.5)] transition-transform hover:scale-110"
+          aria-label="Open chat"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+        </button>
+      </div>
     );
   }
 

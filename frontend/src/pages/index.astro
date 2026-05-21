@@ -48,23 +48,21 @@ const rendered = await Promise.all(
           class="scroll-mt-32 border-t border-border/40 dark:border-slate-700/40"
         >
           <header class="sticky top-[57px] z-20 -mx-6 border-b border-border/40 bg-surface-dark/85 px-6 py-4 backdrop-blur dark:border-slate-700/40 md:-mx-10 md:px-10">
-            <div class="mx-auto max-w-3xl">
-              <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 dark:text-accent/80">
-                {entry.data.category}
-              </p>
-              <h2 class="mt-1 text-2xl font-bold text-primary dark:text-accent md:text-3xl">
-                {entry.data.title}
-              </h2>
-              <p class="mt-1 text-sm leading-tight text-text-muted dark:text-slate-400">
-                {entry.data.yearRange}
-                <span class="mx-2 text-slate-600">·</span>
-                {entry.data.dateRange}
-                <span class="mx-2 text-slate-600">·</span>
-                <span class="font-medium text-primary/80 dark:text-accent/80">{entry.data.place}</span>
-              </p>
-            </div>
+            <p class="text-[10px] font-semibold uppercase tracking-[0.18em] text-primary/80 dark:text-accent/80">
+              {entry.data.category}
+            </p>
+            <h2 class="mt-1 text-2xl font-bold text-primary dark:text-accent md:text-3xl">
+              {entry.data.title}
+            </h2>
+            <p class="mt-1 text-sm leading-tight text-text-muted dark:text-slate-400">
+              {entry.data.yearRange}
+              <span class="mx-2 text-slate-600">·</span>
+              {entry.data.dateRange}
+              <span class="mx-2 text-slate-600">·</span>
+              <span class="font-medium text-primary/80 dark:text-accent/80">{entry.data.place}</span>
+            </p>
           </header>
-          <div class="journey-content mx-auto max-w-3xl px-1 py-8 md:px-2">
+          <div class="journey-content px-1 py-8 md:px-2">
             <Content />
           </div>
         </article>
