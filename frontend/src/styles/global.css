@@ -52,3 +52,17 @@
     background-color: #1e293b;
   }
 }
+
+@keyframes chat-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.chat-float {
+  animation: chat-float 2.4s ease-in-out infinite;
+}
+.chat-float:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-float { animation: none; }
+}
