@@ -47,10 +47,14 @@ const marqueeItems = [...interests, ...interests];
       </nav>
     </header>
 
-    <main class="relative z-10 mx-auto max-w-[1500px] px-6 py-8 md:px-10">
+    <main class="relative z-10 mx-auto max-w-[1500px] px-6 pt-3 pb-8 md:px-10 md:pt-4">
       <SocialLinks />
-      <div class="mb-6 flex justify-center md:mb-8">
-        <ActivityCard />
+      <div class="mb-3 grid items-center gap-4 md:mb-4 md:grid-cols-[1fr_auto_1fr]">
+        <div class="flex justify-center md:justify-start">
+          <ActivityCard variant="status" />
+        </div>
+        <ActivityCard variant="identity" />
+        <div class="hidden md:block"></div>
       </div>
       <slot />
     </main>

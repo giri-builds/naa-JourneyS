@@ -7,7 +7,7 @@ place: "Chennavaram"
 category: "childhood"
 summary: "The beginning of my story — where it all started."
 labelSide: above       # 'above' | 'below'  — which side of the road
-labelOffset: 80        # pixels from the dot center
+labelOffset: 40        # pixels from the dot center
 ---
 
 ## Where It Began

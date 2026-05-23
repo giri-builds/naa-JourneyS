@@ -7,7 +7,7 @@ place: "Bangalore"
 category: "personal"
 summary: "A four-month pause between ICICI and Value Labs — stepping back to reset and recalibrate."
 labelSide: below       # 'above' | 'below'  — which side of the road
-labelOffset: 80        # pixels from the dot center
+labelOffset: 60        # pixels from the dot center
 ---
 
 ## A Pause Worth Taking

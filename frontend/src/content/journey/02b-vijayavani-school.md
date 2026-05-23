@@ -7,7 +7,7 @@ place: "Yerraguntla"
 category: "education"
 summary: "Joined the private school where I built my academic foundation."
 labelSide: below       # 'above' | 'below'  — which side of the road
-labelOffset: 80        # pixels from the dot center
+labelOffset: 50        # pixels from the dot center
 ---
 
 ## Sri Vijayavani Vidyanikethan
