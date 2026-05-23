@@ -7,7 +7,7 @@ place: "Yerraguntla"
 category: "personal"
 summary: "Two years between graduation and the next chapter — a quiet, formative pause."
 labelSide: above       # 'above' | 'below'  — which side of the road
-labelOffset: 80        # pixels from the dot center
+labelOffset: 60        # pixels from the dot center
 ---
 
 ## The In-Between Years
