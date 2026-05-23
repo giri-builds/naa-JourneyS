@@ -3,10 +3,10 @@ import { profile, schedule } from '../data/profile';
 ---
 <div class="activity-card" role="status" aria-live="polite">
   <p class="card-name">{profile.name}</p>
-  <p class="card-place">
-    <span>📍 {profile.place}</span>
-    <span class="card-dot">·</span>
-    <span id="card-clock">--:-- IST</span>
+  <p class="card-place">📍 {profile.place}</p>
+  <p class="card-when">
+    <span aria-hidden="true">🗓️</span>
+    <span id="card-clock">--</span>
   </p>
   <p class="card-status">
     <span class="card-pulse" aria-hidden="true"></span>
@@ -27,26 +27,41 @@ import { profile, schedule } from '../data/profile';
     if (f < t) return now >= f && now < t;
     return now >= f || now < t;
   }
-  function currentActivity(date) {
-    const parts = new Intl.DateTimeFormat('en-GB', {
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false,
-      timeZone: timezone,
-    }).formatToParts(date);
+
+  const dateFmt = new Intl.DateTimeFormat('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    timeZone: timezone,
+  });
+  const timeFmt = new Intl.DateTimeFormat('en-US', {
+    hour: 'numeric',
+    minute: '2-digit',
+    hour12: true,
+    timeZone: timezone,
+  });
+  const slotFmt = new Intl.DateTimeFormat('en-GB', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: timezone,
+  });
+
+  function nowMinutes(date) {
+    const parts = slotFmt.formatToParts(date);
     const hh = parts.find((p) => p.type === 'hour').value;
     const mm = parts.find((p) => p.type === 'minute').value;
-    const nowMin = toMinutes(`${hh}:${mm}`);
-    const slot = schedule.find((s) => inSlot(nowMin, s.from, s.to));
-    return { label: slot ? slot.label : '✨ Free time', time: `${hh}:${mm}` };
+    return toMinutes(`${hh}:${mm}`);
   }
 
   const clockEl = document.getElementById('card-clock');
   const actEl = document.getElementById('card-activity');
   function tick() {
-    const { label, time } = currentActivity(new Date());
-    if (clockEl) clockEl.textContent = `${time} IST`;
-    if (actEl) actEl.textContent = label;
+    const now = new Date();
+    const min = nowMinutes(now);
+    const slot = schedule.find((s) => inSlot(min, s.from, s.to));
+    if (clockEl) clockEl.textContent = `${dateFmt.format(now)}, ${timeFmt.format(now)} IST`;
+    if (actEl) actEl.textContent = slot ? slot.label : '✨ Free time';
   }
   tick();
   setInterval(tick, 30_000);
@@ -75,10 +90,15 @@ import { profile, schedule } from '../data/profile';
     margin-top: 0.2rem;
     font-size: 0.75rem;
     color: #94a3b8;
-    display: flex;
+  }
+  .card-when {
+    margin-top: 0.15rem;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     justify-content: center;
-    gap: 0.45rem;
-    flex-wrap: wrap;
   }
   .card-dot { color: #475569; }
   .card-status {

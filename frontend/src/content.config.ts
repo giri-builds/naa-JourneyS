@@ -14,6 +14,9 @@ const journey = defineCollection({
     tags: z.array(z.string()).optional(),
     coverImage: z.string().optional(),
     summary: z.string(),
+    labelSide: z.enum(['above', 'below']).optional(),
+    labelOffset: z.number().optional(),
+    hideFromTimeline: z.boolean().optional(),
   }),
 });
 

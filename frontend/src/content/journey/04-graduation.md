@@ -6,6 +6,8 @@ yearRange: "2007 - 2011"
 place: "Hyderabad"
 category: "education"
 summary: "University life — academics, independence, and professional preparation."
+labelSide: below       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## University Years

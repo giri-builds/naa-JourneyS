@@ -8,6 +8,11 @@ import { getCollection, render } from 'astro:content';
 const sections = await getCollection('journey');
 const sorted = sections.sort((a, b) => a.data.order - b.data.order);
 
+const FEATURED_IDS = ['10-thoughts-motivations', '08-networth', '09-ambitions'] as const;
+const featured = FEATURED_IDS
+  .map((id) => sorted.find((s) => s.id === id))
+  .filter((s): s is NonNullable<typeof s> => Boolean(s));
+
 const rendered = await Promise.all(
   sorted.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
 );
@@ -16,7 +21,7 @@ const rendered = await Promise.all(
   <section class="pt-4 pb-6 md:pt-8 md:pb-8">
     <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,420px)] lg:gap-16">
       <div>
-        <h1 class="text-5xl font-bold leading-tight tracking-tight md:text-7xl">
+        <h1 class="text-[2.25rem] font-bold leading-tight tracking-tight md:text-[3.375rem]">
           <span class="text-white">naa-</span><span class="bg-gradient-to-r from-accent to-accent-2 bg-clip-text text-transparent">JourneyS</span>
         </h1>
         <p class="mt-6 max-w-2xl text-lg text-slate-300 md:text-xl">
@@ -34,6 +39,28 @@ const rendered = await Promise.all(
         <Globe />
       </div>
     </div>
+  </section>
+
+  <section class="mb-6 grid gap-4 sm:grid-cols-3">
+    {featured.map((s) => (
+      <a
+        href={`#section-${s.id}`}
+        class="group relative overflow-hidden rounded-xl border border-border/50 bg-surface-dark/60 p-4 transition-all hover:-translate-y-0.5 hover:border-accent/60 hover:bg-surface-dark/80 hover:shadow-[0_8px_28px_rgba(34,211,238,0.18)] dark:border-slate-700/50"
+      >
+        <div class="flex items-start gap-3">
+          <span class="text-2xl leading-none">{s.data.title.split(' ')[0]}</span>
+          <div class="min-w-0">
+            <h3 class="text-sm font-semibold text-text dark:text-text-dark group-hover:text-accent">
+              {s.data.title.split(' ').slice(1).join(' ')}
+            </h3>
+            <p class="mt-1 text-xs leading-snug text-text-muted dark:text-slate-400">
+              {s.data.summary}
+            </p>
+          </div>
+        </div>
+        <span class="absolute right-3 top-3 text-xs text-text-muted opacity-0 transition-opacity group-hover:opacity-100 dark:text-slate-500">↓</span>
+      </a>
+    ))}
   </section>
 
   <div id="timeline">

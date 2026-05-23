@@ -6,6 +6,8 @@ yearRange: "2005 - 2007"
 place: "Nellore"
 category: "education"
 summary: "Intermediate years — choosing a path and preparing for the future."
+labelSide: above       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## +2 / Intermediate

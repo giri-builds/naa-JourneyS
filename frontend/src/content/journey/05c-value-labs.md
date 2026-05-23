@@ -1,11 +1,13 @@
 ---
-title: "💼 Value Labs"
+title: "💼 Value Labs - Nielsen"
 order: 5.4
 dateRange: "Age 27 - Age 34"
 yearRange: "Dec 2016 - Jul 2024"
 place: "Hyderabad"
 category: "career"
 summary: "Eight years at Value Labs — three roles across Nielsen Media and eyos.one Retail."
+labelSide: above       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## Data Engineer

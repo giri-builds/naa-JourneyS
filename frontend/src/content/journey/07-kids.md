@@ -6,6 +6,8 @@ yearRange: "2020 - Present"
 place: "Hyderabad"
 category: "personal"
 summary: "Parenthood — the most rewarding chapter."
+labelSide: below       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## Parenthood

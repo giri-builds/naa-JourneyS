@@ -1,11 +1,13 @@
 ---
-title: "💼 Quest Global — Apple Ad Platforms"
+title: " Quest Global — Apple Ad Platforms"
 order: 5.6
 dateRange: "Age 34 - Present"
 yearRange: "Aug 2024 - Present"
 place: "Hyderabad"
 category: "career"
 summary: "Lead Engineer for AI & Platform Engineering, working on Apple Ad Platforms via Quest Global."
+labelSide: below       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## Lead Engineer — Software Development (AI & Platform Engineering)

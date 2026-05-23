@@ -6,6 +6,8 @@ yearRange: "2018 - Present"
 place: "Hyderabad"
 category: "personal"
 summary: "Partnership, growth, and building a life together."
+labelSide: above       # 'above' | 'below'  — which side of the road
+labelOffset: 100        # pixels from the dot center
 ---
 
 ## Married Life

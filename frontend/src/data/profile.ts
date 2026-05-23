@@ -1,6 +1,6 @@
 export const profile = {
   name: "g!r!'$",
-  place: 'Hyderabad, India',
+  place: 'Miyapur, Hyderabad, India',
   timezone: 'Asia/Kolkata',
 };
 

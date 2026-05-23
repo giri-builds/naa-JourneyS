@@ -6,6 +6,8 @@ yearRange: "2013 - 2014"
 place: "Bangalore"
 category: "education"
 summary: "Moved to Bangalore for a Post Graduate Diploma — the springboard into my career."
+labelSide: below       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## Bangalore — A New City
