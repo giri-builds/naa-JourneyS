@@ -6,6 +6,8 @@ yearRange: "1995 - 1998"
 place: "Chennavaram"
 category: "education"
 summary: "First steps into formal education in my home village."
+labelSide: above       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## My First Classroom

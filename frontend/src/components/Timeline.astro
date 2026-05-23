@@ -12,6 +12,9 @@ interface Section {
     place: string;
     summary: string;
     category: string;
+    labelSide?: 'above' | 'below';
+    labelOffset?: number;
+    hideFromTimeline?: boolean;
   };
 }
 
@@ -35,7 +38,9 @@ function parseStartAge(dateRange: string): number | null {
   return m ? Number(m[1]) : null;
 }
 
-const inOrder = sections.slice().sort((a, b) => a.data.order - b.data.order);
+const inOrder = sections
+  .filter((s) => !s.data.hideFromTimeline)
+  .sort((a, b) => a.data.order - b.data.order);
 
 interface Placed extends Section {
   year: number;
@@ -170,14 +175,15 @@ const pathD = roadPath(pts);
         // Adjacent dots always land on opposite sides (no horizontal collide),
         // and same-side dots (i, i+2) land at different distances (no stack).
         const lane = i % 4;
-        // Static class strings so Tailwind JIT can pick them up.
-        const labelPos =
-          lane === 0 ? 'bottom-[130px]'
-          : lane === 1 ? 'top-[64px]'
-          : lane === 2 ? 'bottom-[64px]'
-          : 'top-[130px]';
-        const popoverPos =
-          lane === 0 || lane === 2 ? 'top-[40px]' : 'bottom-[40px]';
+        const fallbackSide: 'above' | 'below' =
+          lane === 0 || lane === 2 ? 'above' : 'below';
+        const fallbackOffset = lane === 0 ? 130 : lane === 1 ? 64 : lane === 2 ? 64 : 130;
+        // Per-entry overrides (from markdown frontmatter) win over the fallback.
+        const side = p.data.labelSide ?? fallbackSide;
+        const offset = p.data.labelOffset ?? fallbackOffset;
+        const labelStyle = side === 'above' ? `bottom: ${offset}px;` : `top: ${offset}px;`;
+        // Popover mirrors the label side: if label is above, popover sits below.
+        const popoverStyle = side === 'above' ? 'top: 40px;' : 'bottom: 40px;';
         const LABEL_W = 144;
         const isNearLeft = p.px - LABEL_W / 2 < padL;
         const isNearRight = p.px + LABEL_W / 2 > padL + plotW;
@@ -199,7 +205,7 @@ const pathD = roadPath(pts);
           >
             <span class="block h-4 w-4 rounded-full border-2 border-white bg-primary shadow-[0_0_18px_rgba(34,211,238,0.65)] transition-transform group-hover:scale-125 dark:border-slate-900 dark:bg-accent"></span>
 
-            <div class={`absolute w-36 ${labelAlign} ${labelPos}`}>
+            <div class={`absolute w-36 ${labelAlign}`} style={labelStyle}>
               <p class="text-sm font-semibold leading-tight text-text dark:text-text-dark group-hover:text-primary dark:group-hover:text-accent">
                 {p.data.title}
               </p>
@@ -212,7 +218,10 @@ const pathD = roadPath(pts);
               <p class="text-[11px] leading-tight font-medium text-primary/80 dark:text-accent/80">{p.data.place}</p>
             </div>
 
-            <div class={`pointer-events-none absolute w-60 rounded-lg border border-border bg-white p-3 text-left text-xs leading-snug text-text-muted opacity-0 shadow-xl transition-opacity duration-150 group-hover:opacity-100 group-focus:opacity-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 ${popoverAlign} ${popoverPos}`}>
+            <div
+              class={`pointer-events-none absolute w-60 rounded-lg border border-border bg-white p-3 text-left text-xs leading-snug text-text-muted opacity-0 shadow-xl transition-opacity duration-150 group-hover:opacity-100 group-focus:opacity-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 ${popoverAlign}`}
+              style={popoverStyle}
+            >
               <p class="mb-1 text-[10px] font-semibold uppercase tracking-wider text-primary dark:text-accent">
                 {p.data.category}
               </p>

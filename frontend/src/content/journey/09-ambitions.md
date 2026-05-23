@@ -6,6 +6,7 @@ yearRange: "2026 - Future"
 place: "Hyderabad"
 category: "aspirations"
 summary: "What drives me forward — goals, dreams, and the road ahead."
+hideFromTimeline: true
 ---
 
 ## Looking Ahead

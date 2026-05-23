@@ -6,6 +6,8 @@ yearRange: "May 2014 - Jul 2016"
 place: "Hyderabad"
 category: "career"
 summary: "First job — Data Analyst at ICICI Bank. Where the career began."
+labelSide: above       # 'above' | 'below'  — which side of the road
+labelOffset: 100        # pixels from the dot center
 ---
 
 ## Data Analyst

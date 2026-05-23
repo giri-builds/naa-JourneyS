@@ -7,6 +7,8 @@ yearRange: "2004 - 2005"
 place: "Yerraguntla"
 category: "education"
 summary: "Elected as School Pupil Leader during 9th standard — my first taste of leadership."
+labelSide: below       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## A Badge of Responsibility

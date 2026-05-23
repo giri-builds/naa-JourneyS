@@ -37,6 +37,19 @@
         "summary": {
           "type": "string"
         },
+        "labelSide": {
+          "type": "string",
+          "enum": [
+            "above",
+            "below"
+          ]
+        },
+        "labelOffset": {
+          "type": "number"
+        },
+        "hideFromTimeline": {
+          "type": "boolean"
+        },
         "$schema": {
           "type": "string"
         }

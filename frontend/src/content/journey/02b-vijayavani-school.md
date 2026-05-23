@@ -6,6 +6,8 @@ yearRange: "1998 - 2005"
 place: "Yerraguntla"
 category: "education"
 summary: "Joined the private school where I built my academic foundation."
+labelSide: below       # 'above' | 'below'  — which side of the road
+labelOffset: 80        # pixels from the dot center
 ---
 
 ## Sri Vijayavani Vidyanikethan

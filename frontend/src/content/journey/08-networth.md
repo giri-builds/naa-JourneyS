@@ -6,6 +6,7 @@ yearRange: "2014 - Present"
 place: "Hyderabad"
 category: "finance"
 summary: "Financial growth, investments, and lessons in building wealth."
+hideFromTimeline: true
 ---
 
 ## Financial Journey
