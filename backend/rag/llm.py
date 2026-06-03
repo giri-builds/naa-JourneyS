@@ -3,6 +3,10 @@ import json
 import requests
 from abc import ABC, abstractmethod
 
+TEMPERATURE = 0.2
+TOP_P = 0.9
+MAX_TOKENS = 1024
+
 
 class LLMProvider(ABC):
     @abstractmethod
@@ -25,8 +29,9 @@ class GroqProvider(LLMProvider):
             json={
                 'model': self.model,
                 'messages': messages,
-                'temperature': 0.3,
-                'max_tokens': 1024,
+                'temperature': TEMPERATURE,
+                'top_p': TOP_P,
+                'max_tokens': MAX_TOKENS,
             },
         )
         response.raise_for_status()
@@ -51,7 +56,9 @@ class ClaudeProvider(LLMProvider):
             },
             json={
                 'model': self.model,
-                'max_tokens': 1024,
+                'max_tokens': MAX_TOKENS,
+                'temperature': TEMPERATURE,
+                'top_p': TOP_P,
                 'system': system,
                 'messages': user_messages,
             },
@@ -75,8 +82,9 @@ class OpenAIProvider(LLMProvider):
             json={
                 'model': self.model,
                 'messages': messages,
-                'temperature': 0.3,
-                'max_tokens': 1024,
+                'temperature': TEMPERATURE,
+                'top_p': TOP_P,
+                'max_tokens': MAX_TOKENS,
             },
         )
         response.raise_for_status()
@@ -95,6 +103,10 @@ class OllamaProvider(LLMProvider):
                 'model': self.model,
                 'messages': messages,
                 'stream': False,
+                'options': {
+                    'temperature': TEMPERATURE,
+                    'top_p': TOP_P,
+                },
             },
         )
         response.raise_for_status()
