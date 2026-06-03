@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import requests
 import time
 from collections import defaultdict, deque
 from http.server import BaseHTTPRequestHandler
@@ -101,6 +102,13 @@ class handler(BaseHTTPRequestHandler):
 
             sources = list({chunk['metadata']['source'] for chunk in context_chunks})
             self._respond(200, {'answer': answer, 'sources': sources}, origin)
+        except (requests.Timeout, requests.ConnectionError):
+            logger.warning('upstream timeout or connection error', exc_info=True)
+            self._respond(
+                504,
+                {'error': 'Upstream service is slow or unavailable. Please try again.'},
+                origin,
+            )
         except Exception:
             logger.exception('chat handler failed')
             self._respond(500, {'error': 'Internal server error'}, origin)
