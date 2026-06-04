@@ -13,6 +13,9 @@ frontend/package-lock.json
 frontend/dist/
 .vercel/
 
+# Eval results
+tests/results/
+
 # IDE
 .vscode/
 .idea/

@@ -1,0 +1,139 @@
+# Full RAG eval — nightly cron + manual workflow_dispatch.
+#
+# Runs scripts/eval_rag.py against the entire 15-question golden set
+# (~75 LLM calls, free Groq tier, ~3-5 min wall). Non-blocking by design;
+# this is observability/LLMOps, not a merge gate. Artifacts are retained
+# 90 days for trend analysis (interview-grade evidence).
+#
+# Why nightly (not weekly): the corpus refreshes via index-content.yml
+# independently of code pushes, so quality can drift without any PR.
+# Daily detection lag (max ~24h) is the right tradeoff for free-tier APIs.
+#
+# SECURITY: secrets are scoped to this workflow only; never echoed.
+# Do NOT add `set -x` or debug prints that dump env.
+
+name: RAG Eval (full)
+
+on:
+  schedule:
+    # 08:00 UTC = 01:00 PT
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Limit questions (blank = full 15-question set)"
+        required: false
+        type: string
+        default: ""
+
+concurrency:
+  group: eval-full-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  full-eval:
+    name: Full RAG eval (15 questions)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements-dev.txt
+            backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -r backend/requirements.txt
+
+      - name: Run full eval
+        # Non-blocking by design — this is observability, not a merge gate.
+        # Transient Groq 429 / judge timeout shouldn't paint the cron red.
+        # The summary + artifact steps run with `if: always()` and surface
+        # what happened either way. Add an `if: failure()` notify step here
+        # later if you want louder signal.
+        continue-on-error: true
+        # SECURITY: GROQ_API_KEY / HF_API_KEY are passed via env only.
+        # Never `echo` them; never enable `set -x` in this step.
+        # `LIMIT` is routed via env (not `${{ }}` interpolation in `run:`) to
+        # prevent shell-injection from workflow_dispatch input.
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+          LIMIT: ${{ inputs.limit }}
+        # Run from repo root — eval_rag.py adds backend/ to sys.path itself.
+        run: |
+          mkdir -p tests/results
+          LIMIT_ARG=""
+          if [ -n "$LIMIT" ]; then
+            if [[ ! "$LIMIT" =~ ^[0-9]+$ ]]; then
+              echo "Invalid limit: must be a positive integer" >&2
+              exit 1
+            fi
+            LIMIT_ARG="--limit $LIMIT"
+          fi
+          python scripts/eval_rag.py \
+            --questions scripts/eval_set.jsonl \
+            --out tests/results \
+            $LIMIT_ARG \
+            2>&1 | tee tests/results/eval_run.log
+
+      - name: Append summary to job step
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import glob, json, statistics
+          files = sorted(glob.glob('tests/results/eval_*.json'))
+          if not files:
+              print("## RAG full eval")
+              print("")
+              print("No results file produced — see job log.")
+              raise SystemExit(0)
+          results = json.loads(open(files[-1]).read())
+          factual = [r for r in results if r.get('type') == 'factual' and 'faithfulness' in r]
+          refusal = [r for r in results if r.get('type') in ('out_of_scope', 'adversarial') and 'error' not in r]
+          errors  = [r for r in results if 'error' in r]
+          print("## RAG full eval")
+          print("")
+          print(f"Total: {len(results)}  ·  factual: {len(factual)}  ·  refusal: {len(refusal)}  ·  errors: {len(errors)}")
+          print("")
+          if factual:
+              print("| metric | mean | min | max |")
+              print("| --- | --- | --- | --- |")
+              for k in ('faithfulness', 'answer_relevancy', 'context_precision', 'context_recall'):
+                  vals = [r[k] for r in factual if k in r]
+                  if vals:
+                      print(f"| {k} | {statistics.mean(vals):.3f} | {min(vals):.3f} | {max(vals):.3f} |")
+              lats = [r['latency_ms'] for r in factual if 'latency_ms' in r]
+              if lats:
+                  print("")
+                  print(f"Latency ms — mean {statistics.mean(lats):.0f}, max {max(lats)}")
+          if refusal:
+              rc = sum(1 for r in refusal if r.get('refusal_correct'))
+              print("")
+              print(f"Refusal correctness: **{rc}/{len(refusal)}**")
+          if errors:
+              print("")
+              print(f"Errors: {len(errors)}")
+              for r in errors[:5]:
+                  print(f"- `{r['id']}`: {r.get('error','')[:200]}")
+          PY
+
+      - name: Upload full eval artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-eval-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tests/results/
+          retention-days: 90

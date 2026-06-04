@@ -4,6 +4,7 @@ import numpy as np
 import requests
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
+EMBEDDING_TIMEOUT = int(os.environ.get('EMBEDDING_TIMEOUT', '15'))
 
 
 def get_embedding(text: str) -> list[float]:
@@ -13,6 +14,7 @@ def get_embedding(text: str) -> list[float]:
         f'https://router.huggingface.co/hf-inference/models/{model}/pipeline/feature-extraction',
         headers={'Authorization': f'Bearer {api_key}'},
         json={'inputs': text, 'options': {'wait_for_model': True}},
+        timeout=EMBEDDING_TIMEOUT,
     )
     response.raise_for_status()
     return response.json()

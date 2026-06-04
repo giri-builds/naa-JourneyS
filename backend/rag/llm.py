@@ -3,6 +3,11 @@ import json
 import requests
 from abc import ABC, abstractmethod
 
+TEMPERATURE = 0.2
+TOP_P = 0.9
+MAX_TOKENS = 1024
+LLM_TIMEOUT = int(os.environ.get('LLM_TIMEOUT', '8'))
+
 
 class LLMProvider(ABC):
     @abstractmethod
@@ -25,9 +30,11 @@ class GroqProvider(LLMProvider):
             json={
                 'model': self.model,
                 'messages': messages,
-                'temperature': 0.3,
-                'max_tokens': 1024,
+                'temperature': TEMPERATURE,
+                'top_p': TOP_P,
+                'max_tokens': MAX_TOKENS,
             },
+            timeout=LLM_TIMEOUT,
         )
         response.raise_for_status()
         return response.json()['choices'][0]['message']['content']
@@ -51,10 +58,13 @@ class ClaudeProvider(LLMProvider):
             },
             json={
                 'model': self.model,
-                'max_tokens': 1024,
+                'max_tokens': MAX_TOKENS,
+                'temperature': TEMPERATURE,
+                'top_p': TOP_P,
                 'system': system,
                 'messages': user_messages,
             },
+            timeout=LLM_TIMEOUT,
         )
         response.raise_for_status()
         return response.json()['content'][0]['text']
@@ -75,9 +85,11 @@ class OpenAIProvider(LLMProvider):
             json={
                 'model': self.model,
                 'messages': messages,
-                'temperature': 0.3,
-                'max_tokens': 1024,
+                'temperature': TEMPERATURE,
+                'top_p': TOP_P,
+                'max_tokens': MAX_TOKENS,
             },
+            timeout=LLM_TIMEOUT,
         )
         response.raise_for_status()
         return response.json()['choices'][0]['message']['content']
@@ -95,7 +107,12 @@ class OllamaProvider(LLMProvider):
                 'model': self.model,
                 'messages': messages,
                 'stream': False,
+                'options': {
+                    'temperature': TEMPERATURE,
+                    'top_p': TOP_P,
+                },
             },
+            timeout=LLM_TIMEOUT,
         )
         response.raise_for_status()
         return response.json()['message']['content']

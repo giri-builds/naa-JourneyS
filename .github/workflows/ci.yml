@@ -1,0 +1,193 @@
+# CI: pytest gate (required) + smoke RAG eval on PRs (non-blocking, with PR comment).
+#
+# Design:
+#   - pytest is the ONLY merge gate. Deterministic, fast (~5s), no API keys.
+#   - smoke-eval runs only AFTER pytest passes (saves Groq quota when tests fail).
+#   - smoke-eval is intentionally NON-blocking (LLM-as-judge is stochastic; we
+#     surface signal in a sticky PR comment instead of failing CI).
+#   - secrets are scoped to smoke-eval only — pytest job has no `env:` block
+#     that touches secrets, so a malicious test could not exfiltrate them.
+#   - SECURITY: never `echo $GROQ_API_KEY` or otherwise print secret env vars.
+#     GitHub auto-masks them in logs but `set -x` / debug prints can still leak.
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, reopened, synchronize]
+  push:
+    branches: [main]
+
+# Cancel superseded PR runs to save minutes; never cancel main pushes.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    name: pytest (merge gate)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements-dev.txt
+            backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -r backend/requirements.txt
+
+      - name: Run pytest
+        # All RAG calls are mocked — no API keys needed in this job's env.
+        run: pytest tests/ -v
+
+  smoke-eval:
+    name: RAG smoke eval (--limit 5, non-blocking)
+    needs: pytest
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: |
+            requirements-dev.txt
+            backend/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+          pip install -r backend/requirements.txt
+
+      - name: Run smoke eval (5-question subset)
+        # Non-blocking: a flaky judge call or transient Groq 429 must not block merge.
+        continue-on-error: true
+        # SECURITY: secrets are passed as env, never echoed. Do NOT add `set -x`.
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          HF_API_KEY: ${{ secrets.HF_API_KEY }}
+        # Run from repo root — eval_rag.py inserts backend/ into sys.path itself.
+        run: |
+          mkdir -p tests/results
+          python scripts/eval_rag.py \
+            --questions scripts/eval_set.jsonl \
+            --out tests/results \
+            --limit 5 \
+            2>&1 | tee tests/results/eval_run.log
+
+      - name: Build PR comment from latest eval JSON
+        id: summary
+        if: always()
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import glob, json, os, statistics
+          files = sorted(glob.glob('tests/results/eval_*.json'))
+          if not files:
+              print("body<<EOF")
+              print("### RAG smoke eval")
+              print("")
+              print("Eval did not produce a results file. See the workflow log for details.")
+              print("EOF")
+              raise SystemExit(0)
+          results = json.loads(open(files[-1]).read())
+          factual = [r for r in results if r.get('type') == 'factual' and 'faithfulness' in r]
+          refusal = [r for r in results if r.get('type') in ('out_of_scope', 'adversarial') and 'error' not in r]
+          errors  = [r for r in results if 'error' in r]
+
+          def m(key):
+              vals = [r[key] for r in factual if key in r]
+              return statistics.mean(vals) if vals else float('nan')
+
+          lines = []
+          lines.append("### RAG smoke eval (--limit 5, non-blocking)")
+          lines.append("")
+          lines.append(f"Sample: {len(results)} questions  ·  factual: {len(factual)}  ·  refusal: {len(refusal)}  ·  errors: {len(errors)}")
+          lines.append("")
+          if factual:
+              lines.append("| metric | mean |")
+              lines.append("| --- | --- |")
+              for k in ('faithfulness', 'answer_relevancy', 'context_precision', 'context_recall'):
+                  v = m(k)
+                  lines.append(f"| {k} | {v:.3f} |")
+              lats = [r['latency_ms'] for r in factual if 'latency_ms' in r]
+              if lats:
+                  lines.append(f"| latency_ms (mean) | {statistics.mean(lats):.0f} |")
+          if refusal:
+              rc = sum(1 for r in refusal if r.get('refusal_correct'))
+              lines.append("")
+              lines.append(f"Refusal correctness: **{rc}/{len(refusal)}**")
+              for r in refusal:
+                  mark = "ok" if r.get('refusal_correct') else "FAIL"
+                  lines.append(f"- [{mark}] `{r['id']}` — {r['question'][:80]}")
+          if errors:
+              lines.append("")
+              lines.append(f"Errors: {len(errors)}")
+              for r in errors[:5]:
+                  lines.append(f"- `{r['id']}`: {r.get('error','')[:120]}")
+          lines.append("")
+          lines.append(f"Artifact: `smoke-eval-{os.environ.get('GITHUB_RUN_ID','')}-{os.environ.get('GITHUB_RUN_ATTEMPT','')}` (90-day retention).")
+          lines.append("Note: this signal is informational; pytest is the merge gate.")
+
+          print("body<<EOF")
+          for line in lines:
+              print(line)
+          print("EOF")
+          PY
+
+      - name: Upload smoke eval artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-eval-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tests/results/
+          retention-days: 90
+
+      - name: Post or update PR comment
+        if: always()
+        # Don't fail the job if comment posting fails (e.g., permissions hiccup on a fork).
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const marker = '<!-- rag-smoke-eval -->';
+            const body = `${marker}\n${process.env.COMMENT_BODY || ''}`;
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            if (!issue_number) {
+              core.info('No PR context; skipping comment.');
+              return;
+            }
+            const { data: comments } = await github.rest.issues.listComments({
+              owner, repo, issue_number, per_page: 100,
+            });
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+            }
+        env:
+          COMMENT_BODY: ${{ steps.summary.outputs.body }}
